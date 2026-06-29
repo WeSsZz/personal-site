@@ -30,6 +30,7 @@ const educationItems = resume.education.map((e) => ({
           <ul class="mt-4 space-y-2" style="color: var(--color-muted);">
             <li>📍 {resume.location}</li>
             <li>✉️ <a href={`mailto:${resume.email}`} class="hover:text-[var(--color-accent)]">{resume.email}</a></li>
+            {resume.phone && <li>📱 {resume.phone}</li>}
             {resume.github && <li>🐙 <a href={resume.github} target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent)]">GitHub</a></li>}
           </ul>
         </div>
@@ -40,7 +41,7 @@ const educationItems = resume.education.map((e) => ({
             {[
               ...resume.skills.languages,
               ...resume.skills.backend,
-              ...resume.skills.frontend,
+              ...resume.skills.ai,
               ...resume.skills.tools,
             ].map((skill) => (
               <span class="rounded-full px-3 py-1 text-xs font-medium" style="background-color: var(--color-surface); color: var(--color-muted);">
@@ -60,4 +61,35 @@ const educationItems = resume.education.map((e) => ({
   <Section title="教育背景">
     <ResumeSection items={educationItems} />
   </Section>
+
+  {
+    resume.publications && resume.publications.length > 0 && (
+      <Section title="论文发表">
+        <div class="max-w-3xl space-y-6">
+          {resume.publications.map((pub) => (
+            <div class="rounded-2xl border p-6" style="border-color: var(--color-border);">
+              <h3 class="font-semibold" style="color: var(--color-fg);">{pub.title}</h3>
+              <p class="mt-2 text-sm" style="color: var(--color-muted);">{pub.venue}</p>
+              {pub.isbn && <p class="mt-1 text-xs" style="color: var(--color-muted);">ISBN: {pub.isbn}</p>}
+            </div>
+          ))}
+        </div>
+      </Section>
+    )
+  }
+
+  {
+    resume.awards && resume.awards.length > 0 && (
+      <Section title="获奖经历">
+        <div class="max-w-3xl space-y-4">
+          {resume.awards.map((award) => (
+            <div class="flex items-center justify-between rounded-2xl border p-5" style="border-color: var(--color-border);">
+              <span class="font-medium" style="color: var(--color-fg);">{award.title}</span>
+              <span class="text-sm" style="color: var(--color-muted);">{award.date}</span>
+            </div>
+          ))}
+        </div>
+      </Section>
+    )
+  }
 </Layout>

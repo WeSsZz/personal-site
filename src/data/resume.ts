@@ -1,71 +1,89 @@
 export const resume = {
-  name: '你的名字',
-  title: '后端 / 算法 / 全栈方向实习生',
-  tagline: '热爱用代码解决真实问题，关注性能、可维护性与用户体验。',
-  email: 'your.email@example.com',
-  github: 'https://github.com/yourname',
+  name: '周骏炜',
+  title: '后端开发 / Agent 开发',
+  tagline:
+    '香港中文大学人工智能硕士在读，南京邮电大学本科。专注高并发后端系统与 AI Agent 应用开发，熟悉 Java 生态、Redis、Kafka、SpringAI 与 RAG 技术栈。',
+  email: '13506237957@163.com',
+  phone: '13506237957',
+  github: '',
   linkedin: '',
-  location: '中国 · 城市',
+  location: '南京 / 香港',
 
   about:
-    '这里是你的个人简介。可以写你的专业、兴趣、擅长方向、求职意向等。建议控制在 3-5 行，突出和应聘岗位相关的亮点。',
+    '我是周骏炜，香港中文大学人工智能（科学应用）硕士在读，本科毕业于南京邮电大学数据科学与大数据技术专业（GPA 3.75/5.0）。我主攻后端开发与 AI Agent 应用，有电商秒杀、AI 客服、金融量化模型等完整项目经验，也发表过 EI 会议论文并获数学建模国赛二等奖。我希望在实习中继续打磨工程能力，把 AI 技术与真实业务场景结合起来。',
 
   education: [
     {
-      school: 'XX 大学',
-      degree: '计算机科学与技术 / 软件工程 本科',
+      school: '香港中文大学',
+      degree: '人工智能（科学应用）硕士',
+      period: '2026.09 - 2028.03',
+      description: '专注人工智能科学应用方向，深入研究大模型应用与 Agent 系统。',
+    },
+    {
+      school: '南京邮电大学',
+      degree: '数据科学与大数据技术 本科 · GPA 3.75/5.0',
       period: '2022.09 - 2026.06',
-      description: '主修课程：数据结构、操作系统、计算机网络、数据库原理等。绩点 / 排名（可选）。',
+      description: '主修数据科学、大数据技术与计算机基础课程。',
     },
   ],
 
   experience: [
     {
-      company: 'XX 公司',
-      role: '后端开发实习生',
-      period: '2025.06 - 至今',
+      company: '江苏常熟农村商业银行',
+      role: '金融科技实习生',
+      period: '2025.07 - 2025.08',
       description:
-        '参与 XX 系统的设计与开发，负责 RESTful API 设计、数据库优化、单元测试等；通过引入缓存将核心接口响应时间降低 40%。',
-    },
-    {
-      company: '校内实验室 / 课题组',
-      role: '研究助理',
-      period: '2024.03 - 2025.05',
-      description: '参与 XX 算法研究，使用 Python 进行数据清洗与模型训练，相关成果发表于 XX 会议/期刊（可选）。',
+        '基于 Mamba 构建债券收益率预测模型。对 2015–2025 年 10 年期国债数据构建 90 天滑动窗口特征序列；设计“特征提取层 + 双任务输出头（回归 + 分类）”架构，引入 PReLU 激活函数。优化数据预处理流程使 I/O 速度提升约 40%；结合 Optuna 贝叶斯超参数搜索与早停机制，训练效率提升约 50%；滚动回测最终预测准确率达 68%，较基线提升 13 个百分点。',
     },
   ],
 
   projects: [
     {
-      name: '分布式任务调度平台',
+      name: '生活志评',
       description:
-        '基于 Spring Boot + Redis 实现的轻量级任务调度系统，支持任务分片、失败重试、可视化监控面板。',
-      tech: ['Java', 'Spring Boot', 'Redis', 'MySQL', 'Vue'],
-      link: 'https://github.com/yourname/project-a',
+        '基于 SpringBoot 的前后端分离本地生活服务平台，涵盖短信登录、商家信息查询、秒杀优惠券等模块。重点实现秒杀库存扣减、多级缓存架构与缓存一致性方案。',
+      tech: ['Spring Boot', 'MySQL', 'Redis', 'Kafka', 'Lua', 'Caffeine', 'MyBatis-Plus'],
+      link: '',
       demo: '',
     },
     {
-      name: '个人博客与作品集网站',
+      name: '智能 AI 客服',
       description:
-        '使用 Astro + Tailwind CSS 构建的静态网站，支持 Markdown 博客、深色模式、响应式布局，用于实习与求职展示。',
-      tech: ['Astro', 'Tailwind CSS', 'TypeScript'],
-      link: 'https://github.com/yourname/personal-site',
-      demo: 'https://your-domain.com',
+        '面向团队真实痛点的智能 AI 客服系统，整合知识库问答、实时对话、AI Ops 三大核心能力，实现问题自动应答与故障智能排查，降低人力成本。',
+      tech: ['Spring Boot', 'SpringAI-Alibaba', 'RAG', 'ReAct', 'Plan-Executor', 'Multi-Agent', 'MCP'],
+      link: '',
+      demo: '',
     },
     {
-      name: '算法可视化工具',
+      name: '基于 Mamba 的债券收益率预测模型',
       description:
-        '用 React + TypeScript 开发的排序与图算法可视化页面，帮助低年级同学理解算法执行过程。',
-      tech: ['React', 'TypeScript', 'Vite'],
-      link: 'https://github.com/yourname/algo-visualizer',
+        '金融实习期间完成的量化预测项目。使用 10 年期国债历史数据构建长序列预测模型，通过 Optuna 超参搜索与滚动回测，将预测准确率提升至 68%。',
+      tech: ['Python', 'PyTorch', 'Mamba', 'Optuna'],
+      link: '',
       demo: '',
     },
   ],
 
   skills: {
-    languages: ['Java', 'Python', 'TypeScript', 'SQL'],
-    backend: ['Spring Boot', 'MyBatis', 'Redis', 'RabbitMQ'],
-    frontend: ['React', 'Vue', 'Tailwind CSS'],
-    tools: ['Git', 'Docker', 'Linux', 'CI/CD'],
+    languages: ['Java', 'Python', 'SQL'],
+    backend: ['Spring Boot', 'MySQL', 'Redis', 'Kafka', 'MyBatis-Plus'],
+    ai: ['SpringAI-Alibaba', 'RAG', 'MCP', 'Multi-Agent', 'Prompt Engineering'],
+    tools: ['Git', 'Docker', 'Linux', 'Cursor / Codex'],
   },
+
+  publications: [
+    {
+      title:
+        'A Sampling Detection Framework Incorporating Monte Carlo Simulation and Simulated Annealing Algorithms',
+      venue: '2025 3rd International Conference on Mechatronics, IoT and Industrial Informatics (ICMIII 2025)',
+      isbn: '979-8-3315-9463-3',
+    },
+  ],
+
+  awards: [
+    {
+      title: '全国大学生数学建模竞赛 国家级二等奖',
+      date: '2024.11',
+    },
+  ],
 };
