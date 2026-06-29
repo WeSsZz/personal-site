@@ -1,0 +1,28 @@
+---
+import { resume } from '../data/resume';
+---
+
+<footer class="border-t py-10" style="border-color: var(--color-border);">
+  <div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-6 md:flex-row">
+    <p class="text-sm" style="color: var(--color-muted);">
+      © {new Date().getFullYear()} {resume.name}. All rights reserved.
+    </p>
+    <div class="flex items-center gap-5 text-sm" style="color: var(--color-muted);">
+      {resume.github && (
+        <a href={resume.github} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-[var(--color-accent)]">
+          GitHub
+        </a>
+      )}
+      {resume.email && (
+        <a href={`mailto:${resume.email}`} class="transition-colors hover:text-[var(--color-accent)]">
+          邮箱
+        </a>
+      )}
+      {resume.linkedin && (
+        <a href={resume.linkedin} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-[var(--color-accent)]">
+          LinkedIn
+        </a>
+      )}
+    </div>
+  </div>
+</footer>

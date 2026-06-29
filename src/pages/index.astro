@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PostCard from '../components/PostCard.astro';
+import { resume } from '../data/resume';
+import { getCollection } from 'astro:content';
+
+const projects = resume.projects.slice(0, 3);
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<Layout title="个人主页" description={resume.tagline}>
+  <Hero />
+
+  <Section title="精选项目" subtitle="实习与课余做过的代表性项目">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {projects.map((p) => <ProjectCard {...p} />)}
+    </div>
+    <div class="mt-10 text-center">
+      <a href="/projects" class="inline-flex items-center gap-2 text-sm font-medium transition-colors hover:text-[var(--color-accent)]" style="color: var(--color-muted);">
+        查看全部项目 →
+      </a>
+    </div>
+  </Section>
+
+  <Section title="最新文章" subtitle="技术学习与思考的记录">
+    <div class="grid gap-6 md:grid-cols-2">
+      {posts.map((post) => <PostCard post={post} />)}
+    </div>
+    <div class="mt-10 text-center">
+      <a href="/blog" class="inline-flex items-center gap-2 text-sm font-medium transition-colors hover:text-[var(--color-accent)]" style="color: var(--color-muted);">
+        查看全部文章 →
+      </a>
+    </div>
+  </Section>
+</Layout>

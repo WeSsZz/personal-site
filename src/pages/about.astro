@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import ResumeSection from '../components/ResumeSection.astro';
+import { resume } from '../data/resume';
+
+const experienceItems = resume.experience.map((e) => ({
+  title: e.company,
+  subtitle: e.role,
+  period: e.period,
+  description: e.description,
+}));
+
+const educationItems = resume.education.map((e) => ({
+  title: e.school,
+  subtitle: e.degree,
+  period: e.period,
+  description: e.description,
+}));
+---
+
+<Layout title="关于我" description={resume.about}>
+  <Section title="关于我">
+    <div class="max-w-3xl">
+      <p class="text-lg leading-relaxed" style="color: var(--color-muted);">{resume.about}</p>
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2">
+        <div class="rounded-2xl border p-6" style="border-color: var(--color-border);">
+          <h3 class="text-sm font-semibold uppercase tracking-wider" style="color: var(--color-accent);">联系方式</h3>
+          <ul class="mt-4 space-y-2" style="color: var(--color-muted);">
+            <li>📍 {resume.location}</li>
+            <li>✉️ <a href={`mailto:${resume.email}`} class="hover:text-[var(--color-accent)]">{resume.email}</a></li>
+            {resume.github && <li>🐙 <a href={resume.github} target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent)]">GitHub</a></li>}
+          </ul>
+        </div>
+
+        <div class="rounded-2xl border p-6" style="border-color: var(--color-border);">
+          <h3 class="text-sm font-semibold uppercase tracking-wider" style="color: var(--color-accent);">技能概览</h3>
+          <div class="mt-4 flex flex-wrap gap-2">
+            {[
+              ...resume.skills.languages,
+              ...resume.skills.backend,
+              ...resume.skills.frontend,
+              ...resume.skills.tools,
+            ].map((skill) => (
+              <span class="rounded-full px-3 py-1 text-xs font-medium" style="background-color: var(--color-surface); color: var(--color-muted);">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section title="工作经历">
+    <ResumeSection items={experienceItems} />
+  </Section>
+
+  <Section title="教育背景">
+    <ResumeSection items={educationItems} />
+  </Section>
+</Layout>
