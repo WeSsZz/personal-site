@@ -17,17 +17,17 @@ export const backendInternship = {
 
 export const resume = {
   name: '周骏炜',
-  title: '后端开发 · AI 工程',
+  title: 'LLM · Agent 算法 · 工程',
   tagline:
-    '香港中文大学人工智能硕士在读。关注后端系统、企业 Agent 与模型后训练，近期实践包括购物 Agent 的 SFT + GRPO、可恢复的 Agent Runtime 和数据集平台开发。',
+    '香港中文大学人工智能硕士在读。关注Agent工程、后端系统与Agentic RL后训练，近期实践包括购物 Agent 的 SFT + GRPO，接入Agent前沿框架、可恢复的 Agent Runtime 和数据集平台开发。',
   email: '13506237957@163.com',
   phone: '13506237957',
   github: 'https://github.com/WeSsZz',
   linkedin: '',
-  location: '南京 / 香港',
+  location: '深圳 / 香港',
 
   about:
-    '我是周骏炜，香港中文大学人工智能（科学应用）硕士在读，本科毕业于南京邮电大学数据科学与大数据技术专业（GPA 3.75/5.0）。我的实践围绕后端开发、企业 Agent 和模型后训练展开：参与高质量数据集平台的任务管理、调度与审批开发，构建可恢复的企业 Agent Runtime，并复现购物 Agent 的 SFT 与 GRPO 训练和评测链路。',
+    '我是周骏炜，香港中文大学人工智能（科学应用）硕士在读，本科毕业于南京邮电大学数据科学与大数据技术专业（GPA 3.75/5.0）。我的实践围绕Agent工程、后端系统和Agentic Rl展开：参与高质量数据集平台的任务管理、调度与审批开发，构建可恢复的企业 Agent Runtime，并复现购物 Agent 的 SFT 与 GRPO 训练和评测链路。',
 
   education: [
     {
