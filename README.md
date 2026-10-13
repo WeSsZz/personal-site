@@ -29,6 +29,8 @@ npm run preview
 
 在 GitHub 打开对应文件，点击铅笔修改，再提交到 `main`；Actions 部署成功后，线上内容会自动更新。只更新 `backendInternship` 即可同步后端实习的公司、时间、项目和职责。购物项目标注为开源复现，源码链接指向上游；页面实验结果只使用本地复现记录。
 
+清空列表时保留 `[]`，例如没有论文时使用 `publications: []`；不要把列表改成 `{}` 或删除字段。首页职业方向和所在地也读取 `resume.ts` 中的 `title` 与 `location`。
+
 ## GitHub Pages
 
 `main` 的提交通过 `.github/workflows/deploy.yml` 自动构建、检查和发布。仓库 Pages 的发布来源设为 GitHub Actions。`astro.config.mjs` 中的 `site` 与 `base`、所有站内链接和资源路径已统一。

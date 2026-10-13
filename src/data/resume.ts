@@ -53,9 +53,8 @@ export const resume = {
     ai: ['LoRA SFT', 'GRPO DPO', 'vLLM', 'Harness', 'Working / Episodic Memory', 'Context Engeneering', 'LangChain/LangGraph', 'RAG', 'Agent Loop'],
     tools: ['Git', 'Docker', 'Linux', 'Codex/ClaudeCode/DSH'],
   },
-publications: {
-
-  },
+  // 没有论文时保留空列表 []，不要删除字段或改成 {}。
+  publications: [] as { title: string; venue: string; isbn: string }[],
   awards: [
     {
       title: '全国大学生数学建模竞赛 国家级二等奖',
