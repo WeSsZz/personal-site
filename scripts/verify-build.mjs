@@ -17,7 +17,9 @@ for(const file of html){
   if(!existsSync(path)&&!existsSync(join(path,'index.html')))failures.push(`${file}: missing ${url}`);
  }
 }
-const paths=['index.html','about/index.html','projects/index.html','blog/index.html','404.html','projects/enterprise-agent/index.html','projects/coding-agent-rl-lab/index.html','projects/lora-finetune-agent/index.html','projects/personal-site/index.html','sitemap.xml'];
+const paths=['index.html','about/index.html','projects/index.html','blog/index.html','404.html','projects/enterprise-agent/index.html','projects/shopping-sft-grpo/index.html','projects/dataset-platform/index.html','sitemap.xml'];
 for(const path of paths)if(!existsSync(join(root,path)))failures.push(`Missing route: ${path}`);
+const retired=['coding-agent-rl-lab','lora-finetune-agent','personal-site'];
+for(const slug of retired)if(existsSync(join(root,`projects/${slug}/index.html`)))failures.push(`Retired project still generated: ${slug}`);
 if(failures.length)throw new Error(failures.join('\n'));
 console.log(`Validated ${html.length} pages: internal links/assets, Pages base, metadata and portfolio routes.`);

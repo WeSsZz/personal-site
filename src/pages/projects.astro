@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';import ProjectCard from '../components/ProjectCard.astro';import { projects } from '../data/projects';
 const categories=['全部项目',...new Set(projects.map(p=>p.category))];
 ---
-<Layout title="项目" description="周骏炜的公开项目：Agent Runtime、代码修复实验、LoRA 微调与 Web 开发。"><section class="section container"><div class="page-heading"><p class="eyebrow">PROJECT INDEX</p><h1>项目与实践<span class="accent">。</span></h1><p>从系统设计到实验验证，记录具体的问题、技术选择与实现。</p></div>
+<Layout title="项目" description="周骏炜的项目与实践：Shopping SFT + GRPO、Enterprise Agent 与高质量数据集平台后端开发。"><section class="section container"><div class="page-heading"><p class="eyebrow">PROJECT INDEX</p><h1>项目与实践<span class="accent">。</span></h1><p>购物 Agent 后训练、企业 Agent 系统与后端实习，记录实际的实现、实验和技术取舍。</p></div>
 <div class="filters" role="group" aria-label="按项目方向筛选">{categories.map((c,i)=><button type="button" class="filter-button" data-filter={c} aria-pressed={i===0?'true':'false'}>{c}<span>{i===0?projects.length:projects.filter(p=>p.category===c).length}</span></button>)}</div><p class="sr-only" id="filter-status" role="status" aria-live="polite"></p><div class="project-grid project-index">{projects.map(p=><ProjectCard project={p}/>)}</div></section></Layout>
 <script>
 const buttons=document.querySelectorAll<HTMLButtonElement>('[data-filter]');const cards=document.querySelectorAll<HTMLElement>('[data-category]');

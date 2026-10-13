@@ -1,8 +1,25 @@
+// 后端实习在此处维护；经历页与项目详情共用这一份内容。
+export const backendInternship = {
+  company: '中电鸿信信息科技有限公司',
+  role: '后端开发实习生',
+  period: '2026.03 - 2026.06',
+  projectName: '高质量数据集平台',
+  description: '参与高质量数据集平台的采集任务管理、调度与审批链路开发，将任务配置、执行状态和跨服务回调串成可追溯的业务流程。',
+  tech: ['SeaTunnel', 'Quartz', 'JSON 配置', '分布式锁'],
+  highlights: [
+    ['采集与任务管理', '完成创建、批量启停、执行、检索与统计等 14 个任务管理接口。通过模板方法和工厂模式选择执行器、生成 SeaTunnel 脚本，管理任务生命周期并增量合并 JSON 配置。'],
+    ['调度与执行追溯', '基于 Quartz 支持 Cron、增量及事件触发。通过增量游标、回溯窗口、失败回滚和历史快照记录采集任务的执行过程。'],
+    ['审批与状态一致性', '关联流程实例和审批回调，使用分布式锁、条件更新与异常补偿处理重复提交以及跨服务状态同步。'],
+  ] as [string, string][],
+  outcome: '完成 14 个任务管理接口，并参与采集执行、调度追溯和审批一致性链路。此处仅展示简历中的职责摘要，公司代码与内部数据不公开。',
+  flow: ['任务配置', '审批回调', '调度执行', '状态追溯'],
+};
+
 export const resume = {
   name: '周骏炜',
   title: '后端开发 · AI 工程',
   tagline:
-    '香港中文大学人工智能硕士在读。关注后端系统、Agent Runtime 与模型训练，把工具调用、执行状态和评测结果连接成可追溯的工程闭环。',
+    '香港中文大学人工智能硕士在读。关注后端系统、企业 Agent 与模型后训练，近期实践包括购物 Agent 的 SFT + GRPO、可恢复的 Agent Runtime 和数据集平台开发。',
   email: '13506237957@163.com',
   phone: '13506237957',
   github: 'https://github.com/WeSsZz',
@@ -10,7 +27,7 @@ export const resume = {
   location: '南京 / 香港',
 
   about:
-    '我是周骏炜，香港中文大学人工智能（科学应用）硕士在读，本科毕业于南京邮电大学数据科学与大数据技术专业（GPA 3.75/5.0）。我主攻后端开发与 AI Agent 应用，有电商秒杀、AI 客服、金融量化模型等完整项目经验，也发表过 EI 会议论文并获数学建模国赛二等奖。我希望在实习中继续打磨工程能力，把 AI 技术与真实业务场景结合起来。',
+    '我是周骏炜，香港中文大学人工智能（科学应用）硕士在读，本科毕业于南京邮电大学数据科学与大数据技术专业（GPA 3.75/5.0）。我的实践围绕后端开发、企业 Agent 和模型后训练展开：参与高质量数据集平台的任务管理、调度与审批开发，构建可恢复的企业 Agent Runtime，并复现购物 Agent 的 SFT 与 GRPO 训练和评测链路。',
 
   education: [
     {
@@ -27,47 +44,12 @@ export const resume = {
     },
   ],
 
-  experience: [
-    {
-      company: '江苏常熟农村商业银行',
-      role: '金融科技实习生',
-      period: '2025.07 - 2025.08',
-      description:
-        '基于 Mamba 构建债券收益率预测模型。对 2015–2025 年 10 年期国债数据构建 90 天滑动窗口特征序列；设计“特征提取层 + 双任务输出头（回归 + 分类）”架构，引入 PReLU 激活函数。优化数据预处理流程使 I/O 速度提升约 40%；结合 Optuna 贝叶斯超参数搜索与早停机制，训练效率提升约 50%；滚动回测最终预测准确率达 68%，较基线提升 13 个百分点。',
-    },
-  ],
-
-  projects: [
-    {
-      name: '生活志评',
-      description:
-        '基于 SpringBoot 的前后端分离本地生活服务平台，涵盖短信登录、商家信息查询、秒杀优惠券等模块。重点实现秒杀库存扣减、多级缓存架构与缓存一致性方案。',
-      tech: ['Spring Boot', 'MySQL', 'Redis', 'Kafka', 'Lua', 'Caffeine', 'MyBatis-Plus'],
-      link: '',
-      demo: '',
-    },
-    {
-      name: '智能 AI 客服',
-      description:
-        '面向团队真实痛点的智能 AI 客服系统，整合知识库问答、实时对话、AI Ops 三大核心能力，实现问题自动应答与故障智能排查，降低人力成本。',
-      tech: ['Spring Boot', 'SpringAI-Alibaba', 'RAG', 'ReAct', 'Plan-Executor', 'Multi-Agent', 'MCP'],
-      link: '',
-      demo: '',
-    },
-    {
-      name: '基于 Mamba 的债券收益率预测模型',
-      description:
-        '金融实习期间完成的量化预测项目。使用 10 年期国债历史数据构建长序列预测模型，通过 Optuna 超参搜索与滚动回测，将预测准确率提升至 68%。',
-      tech: ['Python', 'PyTorch', 'Mamba', 'Optuna'],
-      link: '',
-      demo: '',
-    },
-  ],
+  experience: [backendInternship],
 
   skills: {
     languages: ['Java', 'Python', 'SQL'],
     backend: ['Spring Boot', 'MySQL', 'Redis', 'Kafka', 'MyBatis-Plus'],
-    ai: ['SpringAI-Alibaba', 'RAG', 'MCP', 'Multi-Agent', 'Prompt Engineering'],
+    ai: ['LoRA SFT', 'GRPO', 'vLLM', 'RAG', 'Agent Loop', 'Working / Episodic Memory'],
     tools: ['Git', 'Docker', 'Linux', 'Cursor / Codex'],
   },
 

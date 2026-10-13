@@ -1,161 +1,142 @@
-export const projects = [
+import { backendInternship } from './resume';
+
+export interface Project {
+  slug: string;
+  number: string;
+  category: string;
+  name: string;
+  subtitle: string;
+  description: string;
+  tech: string[];
+  link?: string;
+  sourceLabel?: string;
+  label: string;
+  status: string;
+  challenge: string;
+  decisions: [string, string][];
+  outcome: string;
+  flow: string[];
+  comparison?: {
+    caption: string;
+    rows: { name: string; success: string }[];
+    note: string;
+  };
+}
+
+export const projects: Project[] = [
+  {
+    "slug": "shopping-sft-grpo",
+    "number": "01",
+    "category": "模型后训练",
+    "name": "Shopping SFT + GRPO",
+    "subtitle": "购物 Agent 的后训练与可执行评测",
+    "description": "基于 ShopSimulator 与 Qwen3.5-2B，复现从多步工具调用轨迹、三阶段 LoRA SFT 到在线 GRPO 的训练链路，并用严格购买成功与失败轨迹检验策略表现。",
+    "tech": [
+      "Qwen3.5-2B",
+      "LoRA SFT",
+      "veRL GRPO",
+      "ShopSimulator",
+      "vLLM"
+    ],
+    "link": "https://github.com/YYHDBL/shopping-grpo-longhorizon",
+    "sourceLabel": "上游源码",
+    "label": "开源复现",
+    "status": "训练与开发集评测已完成",
+    "challenge": "购物 Agent 要完成搜索、详情核验、规格选择和购买。合法的工具调用只是起点，最终购买还必须满足用户约束；训练收益也需要与运行时修复带来的变化分开判断。",
+    "decisions": [
+      [
+        "三阶段 SFT",
+        "复用上游 Pure V4 演示池，采用 completion-only loss 训练 LoRA，让模型学习动作协议与完整购物流程，分阶段训练并合并权重。"
+      ],
+      [
+        "在线 GRPO",
+        "从 SFT 模型接续 veRL GRPO，每题采样 4 条轨迹，以环境终局奖励计算组内优势，累计完成 500 次参数更新并验收检查点。"
+      ],
+      [
+        "对照与轨迹诊断",
+        "在相同运行时比较 Base、SFT 与 GRPO；对 28 道 SFT 失败题采样 112 条轨迹，并进行两组各 30 次更新的失败反馈开关消融。"
+      ]
+    ],
+    "outcome": "SFT 在当前开发集上建立了可执行的购物策略。GRPO-500 与 SFT 的总体严格成功率相同；112 条失败题重采样轨迹中，8 道题存在成功候选，提示候选覆盖与单次策略表现仍有差距。",
+    "flow": [
+      "教师轨迹",
+      "LoRA SFT",
+      "在线 GRPO",
+      "执行评测"
+    ],
+    "comparison": {
+      "caption": "原始运行时 · 同一 50 题开发集",
+      "rows": [
+        {
+          "name": "Qwen3.5-2B Base",
+          "success": "0 / 50 · 0%"
+        },
+        {
+          "name": "三阶段 LoRA SFT",
+          "success": "22 / 50 · 44%"
+        },
+        {
+          "name": "GRPO · step 500",
+          "success": "22 / 50 · 44%"
+        }
+      ],
+      "note": "严格成功要求有效的 gold_purchase 终局。这是单次开发集观察，该集合也用于训练验证；独立 Final-200 与多种子验证尚未完成。上游仓库的 200 题成绩不属于本次复现实验。"
+    }
+  },
   {
     "slug": "enterprise-agent",
-    "number": "01",
+    "number": "02",
     "category": "Agent 系统",
     "name": "Enterprise Agent",
-    "subtitle": "可恢复的企业知识与运维 Agent",
-    "description": "把知识检索、工具权限、执行状态和故障恢复放在同一个 Runtime 中，让一次任务有证据、有边界，也能从中断处继续。",
+    "subtitle": "企业知识与运维调查 Runtime",
+    "description": "面向订单分析与运维调查，把只读 Agent Loop、证据检索、工具权限和持久化执行接入同一个 Runtime，让任务可以追溯、恢复，并在写操作前完成审批。",
     "tech": [
       "Python",
       "SQLite",
+      "Agent Loop",
       "RAG",
-      "Agent Runtime"
+      "Tool Gateway"
     ],
     "link": "https://github.com/WeSsZz/AI-Engineer-Roadmap-2026/tree/main/projects/enterprise-agent",
-    "label": "系统工程",
-    "status": "持续开发",
-    "challenge": "多步 Agent 任务不仅需要给出回答，还需要保存执行状态、处理工具故障，并避免重复执行写操作。",
+    "sourceLabel": "GitHub 源码",
+    "label": "Agent 工程",
+    "status": "持续开发与评测",
+    "challenge": "一次调查需要关联指标、日志与 Runbook，还要处理空检索、工具故障和进程中断。执行状态、证据来源、租户权限和审批必须由系统保证。",
     "decisions": [
       [
-        "持久化执行",
-        "用 Task Snapshot、Event Log 与 checkpoint 记录任务生命周期，并支持进程重启后的恢复。"
+        "证据驱动调查",
+        "在固定工作流外接入最多 6 轮的只读调查循环，允许模型选择指标、日志和知识工具；通过上下文预算、查询进展与重复调用检测控制执行。"
       ],
       [
-        "受控工具调用",
-        "通过 Tool Gateway 验证参数、租户范围和权限，对写操作绑定幂等键。"
+        "恢复与受控写入",
+        "用状态机、SQLite 快照与事件日志保存 checkpoint，以乐观锁防止覆盖。Tool Gateway 校验参数与租户范围，统一重试和熔断；写操作绑定 action_id 审批与持久化幂等键。"
       ],
       [
-        "检索与评测",
-        "将检索证据、Working Memory 和 Trace 接入统一评测，比较工作流与 Agent 的实际行为。"
+        "检索、记忆与评测",
+        "比较 BM25、BGE-M3 与 RRF 检索，保留证据引用；仅将验证完成的事故记忆与终态快照原子提交。接入 RCAEval 真实遥测，分开记录诊断、恢复和安全行为。"
       ]
     ],
-    "outcome": "已建立可运行的确定性基线、故障注入与评测入口。检索、恢复和安全行为有独立测试，运行方法与结果保存在项目文档中。",
+    "outcome": "已实现订单分析与运维调查两条演示链路，并建立故障注入、进程恢复及模型评测入口。最新证据提取版本通过 300 项离线回归，36 条真实遥测的 180 次上下文打包符合预算；该轮未调用模型，尚无新版本诊断准确率成绩。",
     "flow": [
-      "Task",
-      "Tool Gateway",
-      "Evidence",
-      "Checkpoint"
+      "告警 / 任务",
+      "证据调查",
+      "验证 / 审批",
+      "持久化 / 恢复"
     ]
   },
   {
-    "slug": "coding-agent-rl-lab",
-    "number": "02",
-    "category": "模型与评测",
-    "name": "Coding Agent RL Lab",
-    "subtitle": "代码修复 Agent 的执行与学习实验",
-    "description": "围绕真实仓库任务构建隔离执行、工具交互、可执行 Verifier 与训练链路，用真实测试区分工具调用成功和任务修复成功。",
-    "tech": [
-      "Python",
-      "Docker",
-      "PyTorch",
-      "LoRA",
-      "SWE-Gym"
-    ],
-    "link": "https://github.com/WeSsZz/coding-agent-rl-lab",
-    "label": "实验与验证",
-    "status": "实验阶段",
-    "challenge": "模型生成了补丁，并不代表问题得到修复。训练奖励、交互轨迹和独立测试结果必须能够准确关联。",
-    "decisions": [
-      [
-        "隔离任务环境",
-        "在固定仓库快照和容器环境中运行任务，区分基础设施失败与模型行为失败。"
-      ],
-      [
-        "可执行判定",
-        "以测试和独立 Verifier 判断结果，将有效编辑、回归失败与任务成功分别记录。"
-      ],
-      [
-        "可追溯训练",
-        "记录策略版本、工具反馈和评测条件，保持训练数据与评测任务的边界。"
-      ]
-    ],
-    "outcome": "已完成工具交互、训练基础设施和受控诊断实验；目前尚未证明在线策略更新能提高完整任务修复率。实验结论以仓库中的评测记录为准。",
-    "flow": [
-      "Issue",
-      "Rollout",
-      "Verifier",
-      "Reward"
-    ]
+    slug: 'dataset-platform',
+    number: '03',
+    category: '后端工程',
+    name: backendInternship.projectName,
+    subtitle: `${backendInternship.company} · ${backendInternship.role}`,
+    description: backendInternship.description,
+    tech: backendInternship.tech,
+    label: '实习实践',
+    status: `实习实践 · ${backendInternship.period}`,
+    challenge: '采集任务从配置、审批到调度执行，跨越多个状态和服务。重复提交、配置更新与执行失败都需要有一致的处理方式和可追溯记录。',
+    decisions: backendInternship.highlights,
+    outcome: backendInternship.outcome,
+    flow: backendInternship.flow,
   },
-  {
-    "slug": "lora-finetune-agent",
-    "number": "03",
-    "category": "模型与评测",
-    "name": "LoRA Fine-tune Agent",
-    "subtitle": "将微调流程组织成可管理任务",
-    "description": "将数据验证、配置生成、训练、监控、评估和导出组织成 Agent 工作流，通过 API 与命令行管理微调任务。",
-    "tech": [
-      "FastAPI",
-      "PEFT",
-      "TRL",
-      "Qwen",
-      "LoRA"
-    ],
-    "link": "https://github.com/WeSsZz/lora-finetune-agent",
-    "label": "训练工具",
-    "status": "项目原型",
-    "challenge": "模型微调涉及数据、配置、运行状态与输出管理，分散的脚本难以对任务进度和失败原因形成完整视图。",
-    "decisions": [
-      [
-        "统一任务入口",
-        "用 REST API 和 CLI 创建、启动并查询训练任务。"
-      ],
-      [
-        "配置与数据检查",
-        "提供 Qwen 配置模板和数据验证工具，将准备步骤与训练执行分开。"
-      ],
-      [
-        "监控与导出",
-        "组织训练状态、loss 与模型导出接口，方便检查一次微调任务的过程。"
-      ]
-    ],
-    "outcome": "提供任务、数据集和模型测试接口，以及本地启动说明。模型效果和资源需求需在具体数据与硬件上验证。",
-    "flow": [
-      "Dataset",
-      "Config",
-      "Training",
-      "Export"
-    ]
-  },
-  {
-    "slug": "personal-site",
-    "number": "04",
-    "category": "Web 与后端",
-    "name": "Personal Site",
-    "subtitle": "内容优先的个人作品集",
-    "description": "用 Astro 将个人资料、公开项目与文章组织成静态网站，关注清晰表达、移动端体验和可持续维护。",
-    "tech": [
-      "Astro",
-      "TypeScript",
-      "CSS",
-      "GitHub Pages"
-    ],
-    "link": "https://github.com/WeSsZz/personal-site",
-    "label": "Web 开发",
-    "status": "持续维护",
-    "challenge": "让访问者快速了解研究和工程方向，也能进一步查看项目实现、技术取舍与经历。",
-    "decisions": [
-      [
-        "集中维护内容",
-        "用结构化数据维护个人资料与项目，用 Markdown 管理文章。"
-      ],
-      [
-        "轻量交互",
-        "页面输出静态 HTML，仅为导航、主题与内容筛选加载必要脚本。"
-      ],
-      [
-        "自动部署",
-        "通过 GitHub Actions 构建并发布到 GitHub Pages，统一处理子目录路径。"
-      ]
-    ],
-    "outcome": "提供项目详情、文章搜索、深浅主题、移动导航和打印版经历页面。",
-    "flow": [
-      "Content",
-      "Astro",
-      "Static HTML",
-      "Pages"
-    ]
-  }
 ];
-export type Project = typeof projects[number];

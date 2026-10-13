@@ -20,12 +20,14 @@ npm run preview
 
 ## 内容维护
 
-- `src/data/resume.ts`：个人资料、经历与技能。
-- `src/data/projects.ts`：公开项目介绍、设计取舍、当前阶段与源码链接。
+- `src/data/resume.ts`：个人资料、经历与技能。文件开头的 `backendInternship` 同时更新实习经历和数据集平台项目，避免重复维护。
+- `src/data/projects.ts`：Shopping SFT + GRPO、Enterprise Agent 的介绍、设计取舍和结果。购物项目的 `comparison` 更新开发集对照表；`link` 可省略，公司项目无需提供源码链接。
 - `src/content/blog/`：公开文章。`draft: true` 的文章不会生成页面。
 - `src/styles/global.css`：主题、响应式布局、文章排版与打印样式。
 
 会话导出、私人交接、面试准备和密钥不进入公开仓库。
+
+在 GitHub 打开对应文件，点击铅笔修改，再提交到 `main`；Actions 部署成功后，线上内容会自动更新。只更新 `backendInternship` 即可同步后端实习的公司、时间、项目和职责。购物项目标注为开源复现，源码链接指向上游；页面实验结果只使用本地复现记录。
 
 ## GitHub Pages
 
