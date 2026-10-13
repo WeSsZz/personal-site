@@ -7,11 +7,12 @@ export const backendInternship = {
   description: '参与高质量数据集平台的采集任务管理、调度与审批链路开发，将任务配置、执行状态和跨服务回调串成可追溯的业务流程。',
   tech: ['SeaTunnel', 'Quartz', 'JSON 配置', '分布式锁'],
   highlights: [
-    ['采集与任务管理', '完成创建、批量启停、执行、检索与统计等 14 个任务管理接口。通过模板方法和工厂模式选择执行器、生成 SeaTunnel 脚本，管理任务生命周期并增量合并 JSON 配置。'],
-    ['调度与执行追溯', '基于 Quartz 支持 Cron、增量及事件触发。通过增量游标、回溯窗口、失败回滚和历史快照记录采集任务的执行过程。'],
-    ['审批与状态一致性', '关联流程实例和审批回调，使用分布式锁、条件更新与异常补偿处理重复提交以及跨服务状态同步。'],
+    ['文件传输', '基于 MinIO Multipart Upload 实现分片上传、断点续传及基于 ETag 的分片合并，持久化上传会话和分片状态，支持查询进度后补传缺失分片。'],
+    ['任务管理', '负责采集任务配置与生命周期管理，完成创建、批量启停、检索及执行记录查询等 14 个接口；以 JSON存储链路、调度及纳管配置，支持增量合并、历史快照与变更追溯。'],
+    ['审批集成', '实现服务登记与案例的事务性保存，通过 Feign 对接工作流，以业务主键关联流程实例并回填审批结果；结合状态约束和租户校验限制非法修改。'],
+    ['源码学习', '阅读团队 SeaTunnel 执行器工厂、模板方法及作业模板生成与异步轮询链路；梳理 Quartz 策略调度、任务注册/注销，以及增量游标、回溯窗口和失败回滚机制。']
   ] as [string, string][],
-  outcome: '完成 14 个任务管理接口，并参与采集执行、调度追溯和审批一致性链路。此处仅展示简历中的职责摘要，公司代码与内部数据不公开。',
+  outcome: '完成MinIO分片上传、断点续传，完成14 个任务管理接口，并参与采集执行、调度追溯和审批一致性链路。此处仅展示简历中的职责摘要，公司代码与内部数据不公开。',
   flow: ['任务配置', '审批回调', '调度执行', '状态追溯'],
 };
 
@@ -49,18 +50,9 @@ export const resume = {
   skills: {
     languages: ['Java', 'Python', 'SQL'],
     backend: ['Spring Boot', 'MySQL', 'Redis', 'Kafka', 'MyBatis-Plus'],
-    ai: ['LoRA SFT', 'GRPO', 'vLLM', 'RAG', 'Agent Loop', 'Working / Episodic Memory'],
-    tools: ['Git', 'Docker', 'Linux', 'Cursor / Codex'],
+    ai: ['LoRA SFT', 'GRPO DPO', 'vLLM', 'Harness', 'Working / Episodic Memory', 'Context Engeneering', 'LangChain/LangGraph', 'RAG', 'Agent Loop'],
+    tools: ['Git', 'Docker', 'Linux', 'Codex/ClaudeCode/DSH'],
   },
-
-  publications: [
-    {
-      title:
-        'A Sampling Detection Framework Incorporating Monte Carlo Simulation and Simulated Annealing Algorithms',
-      venue: '2025 3rd International Conference on Mechatronics, IoT and Industrial Informatics (ICMIII 2025)',
-      isbn: '979-8-3315-9463-3',
-    },
-  ],
 
   awards: [
     {
