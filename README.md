@@ -21,7 +21,7 @@ npm run preview
 ## 内容维护
 
 - `src/data/resume.ts`：个人资料、经历与技能。文件开头的 `backendInternship` 同时更新实习经历和数据集平台项目，避免重复维护。
-- `src/data/projects.ts`：Shopping SFT + GRPO、Enterprise Agent 的介绍、设计取舍和结果。购物项目的 `comparison` 更新开发集对照表；`link` 可省略，公司项目无需提供源码链接。
+- `src/data/projects.ts`：Shopping SFT + GRPO、Enterprise Agent 的介绍、具体改动和结果。`highlights` 更新卡片亮点，`decisions` 更新实现，`evidence` 更新执行证据，`comparisons` 更新对照表；`featured` 控制是否在首页和主要项目列表展示。`link` 可省略。
 - `src/content/blog/`：公开文章。`draft: true` 的文章不会生成页面。
 - `src/styles/global.css`：主题、响应式布局、文章排版与打印样式。
 
@@ -30,6 +30,8 @@ npm run preview
 在 GitHub 打开对应文件，点击铅笔修改，再提交到 `main`；Actions 部署成功后，线上内容会自动更新。只更新 `backendInternship` 即可同步后端实习的公司、时间、项目和职责。购物项目标注为开源复现，源码链接指向上游；页面实验结果只使用本地复现记录。
 
 清空列表时保留 `[]`，例如没有论文时使用 `publications: []`；不要把列表改成 `{}` 或删除字段。首页职业方向和所在地也读取 `resume.ts` 中的 `title` 与 `location`。
+
+网站定位为 LLM Agent 算法 / 工程。技能展示读取 `skills.harness`、`skills.context`、`skills.postTraining` 和 `skills.foundation`；后端实习在经历页默认显示摘要，可展开细节。记录后训练结果时，保留运行时版本、数据集和检查点口径，分别标注执行验证与策略收益。
 
 ## GitHub Pages
 

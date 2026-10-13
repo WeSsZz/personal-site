@@ -18,21 +18,25 @@ export function getStaticPaths(){return projects.map(project=>({params:{slug:pro
     </div>
     <div class="detail-section"><h2>要解决的问题</h2><p>{p.challenge}</p></div>
     <div class="detail-section">
-      <h2>设计与实现</h2>
+      <h2>{p.decisionsHeading || '设计与实现'}</h2>
       <div class="decision-list">{p.decisions.map(([title, text], i) => <div><span class="mono">0{i + 1}</span><h3>{title}</h3><p>{text}</p></div>)}</div>
     </div>
+    {p.evidence && <section class="detail-section" aria-labelledby="evidence-heading">
+      <h2 id="evidence-heading">已核验的执行证据</h2>
+      <div class="evidence-grid">{p.evidence.map(item => <div><strong class="evidence-value">{item.value}</strong><h3>{item.label}</h3><p>{item.note}</p></div>)}</div>
+    </section>}
     <div class="detail-section result-section">
       <div><p class="eyebrow">CURRENT STATE</p><h2>{p.status}</h2></div><p>{p.outcome}</p>
     </div>
-    {p.comparison && <section class="detail-section experiment-results" aria-labelledby="comparison-heading">
-      <h2 id="comparison-heading">实验对照</h2>
+    {p.comparisons?.map((comparison, index) => <section class="detail-section experiment-results" aria-labelledby={`comparison-${index}`}>
+      <h2 id={`comparison-${index}`}>{comparison.title}</h2>
       <table class="comparison-table">
-        <caption>{p.comparison.caption}</caption>
-        <thead><tr><th scope="col">模型 / 检查点</th><th scope="col">严格购买成功</th></tr></thead>
-        <tbody>{p.comparison.rows.map(row => <tr><th scope="row">{row.name}</th><td>{row.success}</td></tr>)}</tbody>
+        <caption>{comparison.caption}</caption>
+        <thead><tr>{comparison.columns.map(column => <th scope="col">{column}</th>)}</tr></thead>
+        <tbody>{comparison.rows.map(row => <tr><th scope="row">{row.name}</th><td>{row.success}</td></tr>)}</tbody>
       </table>
-      <p class="experiment-note">{p.comparison.note}</p>
-    </section>}
+      <p class="experiment-note">{comparison.note}</p>
+    </section>)}
     <footer class="detail-footer">
       <a class="text-link" href={withBase('projects/')}>继续探索其他项目 →</a>
       {p.link && <a class="source-link" href={p.link} target="_blank" rel="noopener noreferrer">{p.sourceLabel} ↗</a>}

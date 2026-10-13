@@ -18,9 +18,9 @@ export const backendInternship = {
 
 export const resume = {
   name: '周骏炜',
-  title: 'LLM · Agent 算法 · 工程',
+  title: 'LLM Agent 算法 / 工程',
   tagline:
-    '香港中文大学人工智能硕士在读。关注Agent工程、后端系统与Agentic RL后训练，近期实践包括购物 Agent 的 SFT + GRPO，接入Agent前沿框架、可恢复的 Agent Runtime 和数据集平台开发。',
+    '香港中文大学人工智能硕士在读，寻求 LLM Agent 算法 / 工程实习。聚焦 Agent Harness、Context Engineering 与 Agentic RL 后训练，当前实践包括企业调查 Runtime 和购物 Agent 的训练、轨迹适配与执行协议对齐。',
   email: '13506237957@163.com',
   phone: '13506237957',
   github: 'https://github.com/WeSsZz',
@@ -28,7 +28,7 @@ export const resume = {
   location: '深圳 / 香港',
 
   about:
-    '我是周骏炜，香港中文大学人工智能（科学应用）硕士在读，本科毕业于南京邮电大学数据科学与大数据技术专业（GPA 3.75/5.0）。我的实践围绕Agent工程、后端系统和Agentic Rl展开：参与高质量数据集平台的任务管理、调度与审批开发，构建可恢复的企业 Agent Runtime，并复现购物 Agent 的 SFT 与 GRPO 训练和评测链路。',
+    '我是周骏炜，香港中文大学人工智能（科学应用）硕士在读，本科毕业于南京邮电大学数据科学与大数据技术专业（GPA 3.75/5.0）。希望从事 LLM Agent 算法 / 工程工作，重点研究 Agent 的执行控制、上下文组织与后训练反馈。企业项目中，我实现自适应 Harness、记忆与可恢复 Runtime；购物项目中，我在 SFT / GRPO 复现基础上推进 Pi + slime 接入、生成概率审计和执行协议对齐。',
 
   education: [
     {
@@ -48,9 +48,13 @@ export const resume = {
   experience: [backendInternship],
 
   skills: {
+    harness: ['Adaptive Harness', 'Agent Loop', 'Tool Contract', 'Checkpoint / Resume', 'Trace / Eval'],
+    context: ['Context Engineering', 'Working / Episodic Memory', 'Observation Projection', 'Context Budget', 'RAG'],
+    postTraining: ['LoRA SFT', 'GRPO', 'Pi + slime', 'veRL', 'vLLM / SGLang', 'Token / Logprob Audit'],
+    foundation: ['Python', 'PyTorch', 'SQLite', 'Docker', 'Linux', 'Git'],
     languages: ['Java', 'Python', 'SQL'],
     backend: ['Spring Boot', 'MySQL', 'Redis', 'Kafka', 'MyBatis-Plus'],
-    ai: ['LoRA SFT', 'GRPO DPO', 'vLLM', 'Harness', 'Working / Episodic Memory', 'Context Engeneering', 'LangChain/LangGraph', 'RAG', 'Agent Loop'],
+    ai: ['LoRA SFT', 'GRPO DPO', 'vLLM', 'Harness', 'Working / Episodic Memory', 'Context Engineering', 'LangChain/LangGraph', 'RAG', 'Agent Loop'],
     tools: ['Git', 'Docker', 'Linux', 'Codex/ClaudeCode/DSH'],
   },
   // 没有论文时保留空列表 []，不要删除字段或改成 {}。

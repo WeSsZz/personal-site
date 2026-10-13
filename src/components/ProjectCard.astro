@@ -6,4 +6,5 @@ const { project: p } = Astro.props;
 ---
 <article class="project-card" data-category={p.category}><div class="project-top"><span class="mono project-number">/{p.number}</span><span class="pill">{p.label}</span></div>
 <h3><a href={withBase(`projects/${p.slug}/`)}>{p.name}<span class="project-arrow" aria-hidden="true">↗</span></a></h3><p class="project-subtitle">{p.subtitle}</p><p class="project-description">{p.description}</p>
+{p.highlights && <ul class="project-highlights">{p.highlights.map(item => <li>{item}</li>)}</ul>}
 <div class="tags">{p.tech.map(t => <span>{t}</span>)}</div><div class="project-bottom"><a class="text-link" href={withBase(`projects/${p.slug}/`)} aria-label={`了解 ${p.name} 的设计与实现`}>设计与实现 <span aria-hidden="true">→</span></a>{p.link && <a class="source-link" href={p.link} target="_blank" rel="noopener noreferrer" aria-label={`查看 ${p.name} 的${p.sourceLabel}`}>{p.sourceLabel} ↗</a>}</div></article>
