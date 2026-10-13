@@ -1,14 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Section from '../components/Section.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import { resume } from '../data/resume';
+import Layout from '../layouts/Layout.astro';import ProjectCard from '../components/ProjectCard.astro';import { projects } from '../data/projects';
+const categories=['全部项目',...new Set(projects.map(p=>p.category))];
 ---
-
-<Layout title="项目" description="我的项目作品集">
-  <Section title="项目作品" subtitle="从课程设计到实习项目，记录我的技术成长">
-    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {resume.projects.map((p) => <ProjectCard {...p} />)}
-    </div>
-  </Section>
-</Layout>
+<Layout title="项目" description="周骏炜的公开项目：Agent Runtime、代码修复实验、LoRA 微调与 Web 开发。"><section class="section container"><div class="page-heading"><p class="eyebrow">PROJECT INDEX</p><h1>项目与实践<span class="accent">。</span></h1><p>从系统设计到实验验证，记录具体的问题、技术选择与实现。</p></div>
+<div class="filters" role="group" aria-label="按项目方向筛选">{categories.map((c,i)=><button type="button" class="filter-button" data-filter={c} aria-pressed={i===0?'true':'false'}>{c}<span>{i===0?projects.length:projects.filter(p=>p.category===c).length}</span></button>)}</div><p class="sr-only" id="filter-status" role="status" aria-live="polite"></p><div class="project-grid project-index">{projects.map(p=><ProjectCard project={p}/>)}</div></section></Layout>
+<script>
+const buttons=document.querySelectorAll<HTMLButtonElement>('[data-filter]');const cards=document.querySelectorAll<HTMLElement>('[data-category]');
+buttons.forEach(button=>button.addEventListener('click',()=>{let count=0;buttons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));cards.forEach(c=>{c.hidden=button.dataset.filter!=='全部项目'&&c.dataset.category!==button.dataset.filter;if(!c.hidden)count++;});const status=document.querySelector('#filter-status');if(status)status.textContent=`显示 ${count} 个项目`;}));
+</script>

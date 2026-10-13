@@ -1,41 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import Section from '../components/Section.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import PostCard from '../components/PostCard.astro';
-import { resume } from '../data/resume';
-import { getCollection } from 'astro:content';
-
-const projects = resume.projects.slice(0, 3);
-const posts = (await getCollection('blog'))
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+import Layout from '../layouts/Layout.astro';import Hero from '../components/Hero.astro';import ProjectCard from '../components/ProjectCard.astro';import PostCard from '../components/PostCard.astro';
+import { projects } from '../data/projects';import { resume } from '../data/resume';import { withBase } from '../lib/urls';import { getCollection } from 'astro:content';
+const posts=(await getCollection('blog')).filter(p=>!p.data.draft).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf()).slice(0,2);
 ---
-
-<Layout title="个人主页" description={resume.tagline}>
-  <Hero />
-
-  <Section title="精选项目" subtitle="实习与课余做过的代表性项目">
-    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {projects.map((p) => <ProjectCard {...p} />)}
-    </div>
-    <div class="mt-10 text-center">
-      <a href="/projects" class="inline-flex items-center gap-2 text-sm font-medium transition-colors hover:text-[var(--color-accent)]" style="color: var(--color-muted);">
-        查看全部项目 →
-      </a>
-    </div>
-  </Section>
-
-  <Section title="最新文章" subtitle="技术学习与思考的记录">
-    <div class="grid gap-6 md:grid-cols-2">
-      {posts.map((post) => <PostCard post={post} />)}
-    </div>
-    <div class="mt-10 text-center">
-      <a href="/blog" class="inline-flex items-center gap-2 text-sm font-medium transition-colors hover:text-[var(--color-accent)]" style="color: var(--color-muted);">
-        查看全部文章 →
-      </a>
-    </div>
-  </Section>
-</Layout>
+<Layout><Hero/><section class="focus-strip"><div class="container focus-inner"><span class="eyebrow">WHAT I WORK ON</span><p>后端系统<span>/</span> Agent Runtime<span>/</span> 模型训练与评测</p></div></section>
+<section class="section container"><div class="section-heading"><div><p class="eyebrow">SELECTED WORK / 01—03</p><h2>用项目回答工程问题<span class="accent">。</span></h2></div><a class="text-link" href={withBase('projects/')}>全部项目 ↗</a></div><div class="project-grid">{projects.slice(0,3).map(p=><ProjectCard project={p}/>)}</div></section>
+<section class="approach-section container"><div><p class="eyebrow">HOW I BUILD</p><h2>先把问题定义清楚，<br/>再把结果验证完整。</h2><p class="section-intro">从后端服务到 Agent 实验，我关注的是系统实际做了什么，以及我们凭什么相信它。</p><a class="text-link" href={withBase('about/')}>更多关于我的经历 →</a></div><div class="principles"><div><span class="mono">01</span><h3>明确系统边界</h3><p>把工具权限、数据范围与任务状态写进实现，而不只写进提示词。</p></div><div><span class="mono">02</span><h3>让执行可追溯</h3><p>保存关键状态、工具反馈与版本信息，让故障有据可查。</p></div><div><span class="mono">03</span><h3>用真实反馈迭代</h3><p>用测试、对照实验和独立评测区分运行成功与任务成功。</p></div></div></section>
+<section class="section container"><div class="section-heading"><div><p class="eyebrow">WRITING & REFLECTION</p><h2>一些记录与思考<span class="accent">。</span></h2></div><a class="text-link" href={withBase('blog/')}>所有文章 ↗</a></div><div class="post-grid">{posts.map(post=><PostCard post={post}/>)}</div></section>
+<section class="contact-section container"><div><p class="eyebrow">LET'S CONNECT</p><h2>有值得解决的问题？<br/>欢迎交流。</h2><p>后端开发、Agent 工程与模型评测，是我愿意继续深入的方向。</p></div><a class="button primary" href={`mailto:${resume.email}`}>给我写邮件 <span aria-hidden="true">↗</span></a></section></Layout>

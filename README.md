@@ -1,43 +1,34 @@
-# Astro Starter Kit: Minimal
+# 周骏炜 · 个人网站
 
-```sh
-npm create astro@latest -- --template minimal
+基于 Astro 的个人作品集，包含首页、公开项目与项目详情、教育和实习经历、Markdown 文章。
+
+线上地址：<https://wesszz.github.io/personal-site/>
+
+## 本地开发
+
+Node.js 24，使用仓库内的 npm 锁文件：
+
+```bash
+npm ci
+npm run dev
+npm run build
+npm run verify
+npm run preview
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+开发预览路径是 `/personal-site/`，与 GitHub Pages 保持一致。
 
-## 🚀 Project Structure
+## 内容维护
 
-Inside of your Astro project, you'll see the following folders and files:
+- `src/data/resume.ts`：个人资料、经历与技能。
+- `src/data/projects.ts`：公开项目介绍、设计取舍、当前阶段与源码链接。
+- `src/content/blog/`：公开文章。`draft: true` 的文章不会生成页面。
+- `src/styles/global.css`：主题、响应式布局、文章排版与打印样式。
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+会话导出、私人交接、面试准备和密钥不进入公开仓库。
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## GitHub Pages
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+`main` 的提交通过 `.github/workflows/deploy.yml` 自动构建、检查和发布。仓库 Pages 的发布来源设为 GitHub Actions。`astro.config.mjs` 中的 `site` 与 `base`、所有站内链接和资源路径已统一。
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+官方文档：[GitHub Pages 工作流](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)、[Astro GitHub Pages 部署](https://docs.astro.build/en/guides/deploy/github/)。

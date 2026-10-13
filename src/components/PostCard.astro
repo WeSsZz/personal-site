@@ -1,29 +1,8 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-
-export interface Props {
-  post: CollectionEntry<'blog'>;
-}
-
+import { withBase } from '../lib/urls';
+export interface Props { post: CollectionEntry<'blog'>; }
 const { post } = Astro.props;
-const { title, description, pubDate, tags } = post.data;
 ---
-
-<article class="group">
-  <a href={`/blog/${post.id}`} class="block rounded-2xl border p-6 transition-all hover:-translate-y-1 hover:shadow-md" style="border-color: var(--color-border);">
-    <div class="flex flex-wrap items-center gap-3 text-sm" style="color: var(--color-muted);">
-      <time datetime={pubDate.toISOString()}>
-        {pubDate.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })}
-      </time>
-      {tags.length > 0 && tags.map((tag) => (
-        <span class="rounded-full px-2 py-0.5 text-xs" style="background-color: var(--color-surface);">#{tag}</span>
-      ))}
-    </div>
-
-    <h3 class="mt-3 text-xl font-semibold transition-colors group-hover:text-[var(--color-accent)]" style="color: var(--color-fg);">
-      {title}
-    </h3>
-
-    <p class="mt-2 line-clamp-2" style="color: var(--color-muted);">{description}</p>
-  </a>
-</article>
+<article class="post-card post-item" data-search={`${post.data.title} ${post.data.description} ${post.data.tags.join(' ')}`}><div class="post-meta"><time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('zh-CN',{timeZone:'UTC',year:'numeric',month:'2-digit',day:'2-digit'})}</time><span>{post.data.tags[0]}</span></div>
+<h3><a href={withBase(`blog/${post.id}/`)}>{post.data.title}<span aria-hidden="true">↗</span></a></h3><p>{post.data.description}</p><div class="tags">{post.data.tags.map(t => <span>{t}</span>)}</div></article>

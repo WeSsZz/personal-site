@@ -1,0 +1,4 @@
+---
+import Layout from '../layouts/Layout.astro';import {withBase} from '../lib/urls';
+---
+<Layout title="页面未找到"><section class="section container"><div class="page-heading"><p class="eyebrow">404 / NOT FOUND</p><h1>这条路径还没有内容<span class="accent">。</span></h1><p>页面可能已移动，可以从首页或项目列表继续浏览。</p></div><div class="actions"><a class="button primary" href={withBase('')}>返回首页 →</a><a class="text-link" href={withBase('projects/')}>查看项目 ↗</a></div></section></Layout>

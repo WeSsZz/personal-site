@@ -1,11 +1,11 @@
 export const resume = {
   name: '周骏炜',
-  title: '后端开发 / Agent 开发',
+  title: '后端开发 · AI 工程',
   tagline:
-    '香港中文大学人工智能硕士在读，南京邮电大学本科。专注高并发后端系统与 AI Agent 应用开发，熟悉 Java 生态、Redis、Kafka、SpringAI 与 RAG 技术栈。',
+    '香港中文大学人工智能硕士在读。关注后端系统、Agent Runtime 与模型训练，把工具调用、执行状态和评测结果连接成可追溯的工程闭环。',
   email: '13506237957@163.com',
   phone: '13506237957',
-  github: '',
+  github: 'https://github.com/WeSsZz',
   linkedin: '',
   location: '南京 / 香港',
 
