@@ -17,7 +17,7 @@ for(const file of html){
   if(!existsSync(path)&&!existsSync(join(path,'index.html')))failures.push(`${file}: missing ${url}`);
  }
 }
-const paths=['index.html','about/index.html','projects/index.html','blog/index.html','404.html','projects/enterprise-agent/index.html','projects/shopping-sft-grpo/index.html','projects/dataset-platform/index.html','sitemap.xml'];
+const paths=['index.html','about/index.html','projects/index.html','blog/index.html','404.html','projects/enterprise-agent/index.html','projects/shopping-sft-grpo/index.html','projects/dataset-platform/index.html','blog/pi-slime-trajectory-alignment/index.html','blog/agent-loop-progress-and-resume/index.html','evidence/shopping-integration-audit.json','evidence/enterprise-loop-contract.json','sitemap.xml'];
 for(const path of paths)if(!existsSync(join(root,path)))failures.push(`Missing route: ${path}`);
 const retired=['coding-agent-rl-lab','lora-finetune-agent','personal-site'];
 for(const slug of retired)if(existsSync(join(root,`projects/${slug}/index.html`)))failures.push(`Retired project still generated: ${slug}`);

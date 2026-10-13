@@ -1,0 +1,9 @@
+---
+import type { CaseStudy } from '../data/case-studies';
+export interface Props { study: CaseStudy; }
+const { study } = Astro.props;
+---
+<div class="case-timeline">
+  <p class="timeline-source">{study.timeline.source}</p>
+  <ol>{study.timeline.events.map((event,index) => <li><span class="timeline-index mono" aria-hidden="true">{String(index+1).padStart(2,'0')}</span><details open={index===0}><summary><span>{event.title}</span><small>{event.summary}</small></summary><p>{event.detail}</p></details></li>)}</ol>
+</div>

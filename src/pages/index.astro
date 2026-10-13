@@ -1,10 +1,23 @@
 ---
-import Layout from '../layouts/Layout.astro';import Hero from '../components/Hero.astro';import ProjectCard from '../components/ProjectCard.astro';import PostCard from '../components/PostCard.astro';
-import { featuredProjects } from '../data/projects';import { resume } from '../data/resume';import { withBase } from '../lib/urls';import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PostCard from '../components/PostCard.astro';
+import { featuredProjects } from '../data/projects';
+import { resume } from '../data/resume';
+import { withBase } from '../lib/urls';
+import { getCollection } from 'astro:content';
 const posts=(await getCollection('blog')).filter(p=>!p.data.draft).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf()).slice(0,2);
 ---
-<Layout><Hero/><section class="focus-strip"><div class="container focus-inner"><span class="eyebrow">WHAT I WORK ON</span><p>Agent Harness<span>/</span>Context Engineering<span>/</span>Agentic RL</p></div></section>
-<section class="section container"><div class="section-heading"><div><p class="eyebrow">SELECTED WORK / 01—02</p><h2>构建 Agent，研究它如何执行与学习<span class="accent">。</span></h2></div><a class="text-link" href={withBase('projects/')}>项目与实验 ↗</a></div><div class="project-grid agent-project-grid">{featuredProjects.map(p=><ProjectCard project={p}/>)}</div></section>
-<section class="approach-section container"><div><p class="eyebrow">ALGORITHMS × ENGINEERING</p><h2>从执行机制，<br/>到学习信号。</h2><p class="section-intro">我关注模型之外的执行框架，以及轨迹、上下文和奖励如何共同影响 Agent 的行为。</p><a class="text-link" href={withBase('about/')}>了解我的技术方向 →</a></div><div class="principles"><div><span class="mono">01</span><h3>Agent Harness / Runtime</h3><p>风险路由、工具合同与循环进展控制，连接 checkpoint、恢复和可回放 Trace。</p></div><div><span class="mono">02</span><h3>Context Engineering</h3><p>组织证据、观察与 Working / Episodic Memory，在预算内保留做决策所需的信息。</p></div><div><span class="mono">03</span><h3>Agentic RL / Evaluation</h3><p>对齐生成 token、logprob 和训练 mask，用配对实验拆分运行时改动与策略学习的效果。</p></div></div></section>
-<section class="section container"><div class="section-heading"><div><p class="eyebrow">WRITING & REFLECTION</p><h2>一些记录与思考<span class="accent">。</span></h2></div><a class="text-link" href={withBase('blog/')}>所有文章 ↗</a></div><div class="post-grid">{posts.map(post=><PostCard post={post}/>)}</div></section>
-<section class="contact-section container"><div><p class="eyebrow">LLM AGENT · INTERNSHIP</p><h2>寻求 LLM Agent<br/>算法 / 工程实习。</h2><p>希望参与 Agent Harness、Context Engineering 或后训练与评测相关工作。</p></div><a class="button primary" href={`mailto:${resume.email}`}>联系我 <span aria-hidden="true">↗</span></a></section></Layout>
+<Layout>
+  <Hero/>
+  <section class="selected-cases container" aria-labelledby="selected-heading">
+    <div class="section-heading"><div><p class="eyebrow">SELECTED WORK / 01—02</p><h2 id="selected-heading">代表项目<span class="accent">。</span></h2></div><a class="text-link" href={withBase('projects/')}>全部项目 ↗</a></div>
+    <div class="project-grid agent-project-grid">{featuredProjects.map(p=><ProjectCard project={p}/>)}</div>
+  </section>
+  <section class="section container technical-writing" aria-labelledby="writing-heading">
+    <div class="section-heading"><div><p class="eyebrow">IMPLEMENTATION NOTES</p><h2 id="writing-heading">实现笔记<span class="accent">。</span></h2><p class="writing-intro">把接口约束、设计取舍与实验边界写清楚。</p></div><a class="text-link" href={withBase('blog/')}>所有文章 ↗</a></div>
+    <div class="post-grid">{posts.map(post=><PostCard post={post}/>)}</div>
+  </section>
+  <section class="portfolio-contact container"><p>正在寻找 <strong>LLM Agent 算法 / 工程实习</strong>，欢迎交流项目与岗位。</p><a class="text-link" href={`mailto:${resume.email}`}>{resume.email} ↗</a></section>
+</Layout>

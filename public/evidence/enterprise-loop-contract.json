@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "project": "Enterprise Agent",
+  "kind": "implemented_contract_summary",
+  "reviewed_on": "2026-10-14",
+  "source_basis": "Local agent-loop design, ProgressTracker, ContextEngine and existing loop-control tests.",
+  "timeline_is_mechanism_example": true,
+  "progress_detection": {
+    "supported_tools": ["metrics", "logs", "knowledge"],
+    "basis": "Validated complete result content; excludes transport metadata, random evidence IDs, query wording and ranking score changes.",
+    "new_content_resets_no_progress": true,
+    "no_progress_limit": 3,
+    "recovery_tool_calls": 1,
+    "tool_error_limit": 3,
+    "recent_requests_retained": 12,
+    "request_cycle_lengths_detected": [2, 3]
+  },
+  "default_read_only_budget": {
+    "model_decisions": 6,
+    "logical_tool_calls": 12,
+    "reported_usage_tokens": 12000,
+    "wall_time_seconds": 300
+  },
+  "context_projection": {
+    "max_context_characters": 12000,
+    "historical_episodes": 2,
+    "historical_summary_max_characters": 400,
+    "token_estimate_is_heuristic": true,
+    "required_inputs_and_references_preserved": true,
+    "unfit_required_context_pauses_before_model_call": true
+  },
+  "resume_contract": {
+    "plain_resume_returns_saved_paused_state": true,
+    "additional_input_or_explicit_retry_required_for_stall_recovery": true,
+    "content_fingerprints_preserved": true,
+    "budgets_are_absolute_cumulative_limits": true,
+    "permissions_preserved": true,
+    "paused_tasks_commit_no_long_term_memory_or_write_actions": true
+  },
+  "limitations": [
+    "Progress rules cover the three named tools; asynchronous polling needs a tool-specific contract.",
+    "Character-based context limits and reported token-usage limits are separate budgets.",
+    "A response can exceed a usage limit before the runtime checks it; provider-side request limits and deadlines are still needed.",
+    "The durable wall-time budget includes paused downtime.",
+    "This summary does not claim production diagnostic accuracy or present an incident trace."
+  ],
+  "privacy": "Only implementation contracts are included; no company records, raw incidents or conversation text."
+}

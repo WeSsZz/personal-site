@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "project": "Shopping SFT + GRPO / Pi + slime",
+  "kind": "curated_execution_summary",
+  "reviewed_on": "2026-10-14",
+  "source_basis": "Saved GPU inference, training and optimizer execution reports; explicitly selected public aggregate fields.",
+  "version_boundary": "gpu-train-v10: integration version before the subsequent tool-protocol parity changes",
+  "inference_check": {
+    "execution_completed": true,
+    "task_id": 53,
+    "tool_steps": 8,
+    "strict_gold_purchase": true,
+    "reward": 1,
+    "generated_tokens": 506,
+    "tool_and_template_tokens_masked": 6903
+  },
+  "training_check": {
+    "sample_attempts": 12,
+    "valid_terminal_trajectories": 8,
+    "accepted_group": {
+      "task_id": 83,
+      "size": 4,
+      "terminal_status": "partial_alternative_purchase",
+      "strict_gold_successes": 0,
+      "rewards": [0.00078125, 0.04375, 0.00078125, 0.00078125]
+    },
+    "logprob_audit": {
+      "generated_tokens_compared": 2392,
+      "mean_absolute_difference": 0.0105571207,
+      "max_absolute_difference": 0.4549408,
+      "formal_numeric_tolerance_accepted": false
+    },
+    "optimizer_updates": 1,
+    "optimizer_update_successful": true,
+    "model_parameters_changed": true,
+    "parameter_elements": 1881825088,
+    "gradient_norm": 7.689841270446777,
+    "checkpoint_saved": true,
+    "weights_synced_to_sglang": true
+  },
+  "claims": {
+    "execution_training_sync_chain_verified": true,
+    "rl_success_rate_improvement_demonstrated": false,
+    "new_protocol_paired_gpu_evaluation_completed": false
+  },
+  "privacy": "No conversation text, credentials, machine paths, private task payloads or raw logs are included."
+}

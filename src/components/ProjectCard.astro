@@ -1,10 +1,24 @@
 ---
 import type { Project } from '../data/projects';
+import { caseStudies } from '../data/case-studies';
 import { withBase } from '../lib/urls';
 export interface Props { project: Project; }
 const { project: p } = Astro.props;
+const study = caseStudies[p.slug];
 ---
-<article class="project-card" data-category={p.category}><div class="project-top"><span class="mono project-number">/{p.number}</span><span class="pill">{p.label}</span></div>
-<h3><a href={withBase(`projects/${p.slug}/`)}>{p.name}<span class="project-arrow" aria-hidden="true">↗</span></a></h3><p class="project-subtitle">{p.subtitle}</p><p class="project-description">{p.description}</p>
-{p.highlights && <ul class="project-highlights">{p.highlights.map(item => <li>{item}</li>)}</ul>}
-<div class="tags">{p.tech.map(t => <span>{t}</span>)}</div><div class="project-bottom"><a class="text-link" href={withBase(`projects/${p.slug}/`)} aria-label={`了解 ${p.name} 的设计与实现`}>设计与实现 <span aria-hidden="true">→</span></a>{p.link && <a class="source-link" href={p.link} target="_blank" rel="noopener noreferrer" aria-label={`查看 ${p.name} 的${p.sourceLabel}`}>{p.sourceLabel} ↗</a>}</div></article>
+<article class:list={['project-card', { 'case-card': !!study }]} data-category={p.category}>
+  <div class="project-top"><span class="mono project-number">/{p.number}</span><span class="pill">{p.label}</span></div>
+  <h3><a href={withBase(`projects/${p.slug}/`)}>{p.name}<span class="project-arrow" aria-hidden="true">↗</span></a></h3>
+  {study ? <>
+    <p class="case-role">{study.role}</p>
+    <p class="project-description">{study.summary}</p>
+    <p class="case-result"><span class="mono">VERIFIED</span>{study.result}</p>
+    <div class="case-thumbnail" aria-label={`${p.name} 的关键组件`}>{study.thumbnail.map((label,index)=><span><small class="mono">0{index+1}</small>{label}</span>)}</div>
+    <div class="case-contribution"><h4>我的工作</h4><ul>{study.contributions.map(item=><li>{item}</li>)}</ul></div>
+  </> : <>
+    <p class="project-subtitle">{p.subtitle}</p><p class="project-description">{p.description}</p>
+    {p.highlights && <ul class="project-highlights">{p.highlights.map(item=><li>{item}</li>)}</ul>}
+    <div class="tags">{p.tech.map(t=><span>{t}</span>)}</div>
+  </>}
+  <div class="project-bottom"><a class="text-link" href={withBase(`projects/${p.slug}/`)} aria-label={`了解 ${p.name} 的设计与实现`}>案例与证据 <span aria-hidden="true">→</span></a>{p.link && <a class="source-link" href={p.link} target="_blank" rel="noopener noreferrer">{p.sourceLabel} ↗</a>}</div>
+</article>

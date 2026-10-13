@@ -1,0 +1,16 @@
+---
+import type { CaseStudy } from '../data/case-studies';
+export interface Props { study: CaseStudy; }
+const { study } = Astro.props;
+---
+<figure class="case-architecture">
+  <div class="architecture-legend"><span><i class="legend-work" aria-hidden="true"></i>项目实现 / 连接与校验</span><span><i class="legend-upstream" aria-hidden="true"></i>沿用组件</span></div>
+  {study.architecture.lanes.map(lane => <div class="architecture-lane">
+    <h3>{lane.name}</h3>
+    <div class:list={['architecture-nodes', {'has-sequence':lane.sequence}]} style={`--node-count:${lane.nodes.length}`}>
+      {lane.nodes.map((node,index) => <div class:list={['architecture-node', `node-${node.ownership}`]}><span class="mono">{String(index+1).padStart(2,'0')}</span><strong>{node.title}</strong><small>{node.detail}</small>{lane.sequence && index<lane.nodes.length-1 && <span class="architecture-arrow" aria-hidden="true">→</span>}</div>)}
+    </div>
+    <p class="architecture-note">{lane.note}</p>
+  </div>)}
+  <figcaption>{study.architecture.caption}</figcaption>
+</figure>
