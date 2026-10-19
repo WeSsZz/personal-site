@@ -1,157 +1,73 @@
-/* Case-study portfolio: compact introduction, contribution evidence and readable diagrams. */
-.portfolio-intro{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:52px;padding-top:34px;padding-bottom:25px}
-.portfolio-intro .eyebrow{margin-bottom:12px}
-.portfolio-intro h1{font-size:36px;letter-spacing:-.04em;line-height:1.15;margin:0}
-.intro-direction{display:block;font-size:24px;letter-spacing:-.025em;margin-top:11px;font-weight:500}
-.intro-description{max-width:660px;margin:16px 0 12px;color:var(--muted);font-size:14px;line-height:1.9}
-.intro-description strong{color:var(--fg);font-weight:500}
-.intro-links{display:flex;gap:24px;align-items:center;flex-wrap:wrap;font-size:12px}
-.intro-links>span{color:var(--muted)}
-.intro-availability{align-self:center;padding:23px 0 23px 27px;border-left:1px solid var(--border)}
-.intro-availability .eyebrow{font-size:9px;letter-spacing:.12em;margin-bottom:14px}
-.intro-availability strong{font-size:16px;line-height:1.6;font-weight:500}
-.intro-availability p:not(.eyebrow){font-size:12px;color:var(--muted);margin:9px 0 18px}
-.selected-cases{padding-top:22px;padding-bottom:14px}
-.selected-cases .section-heading{margin-bottom:23px}
-.selected-cases h2,.technical-writing h2{font-size:29px;line-height:1.4}
-.selected-cases .section-heading .eyebrow,.technical-writing .section-heading .eyebrow{margin-bottom:7px}
-.agent-project-grid{gap:22px}
-.case-card,.project-index .case-card{padding:25px 27px;min-width:0}
-.case-card h3{font-size:25px;line-height:1.4;letter-spacing:-.03em}
-.case-card .project-top{margin-bottom:17px}
-.case-role{font-size:11px;color:var(--accent);letter-spacing:.04em;margin:7px 0 13px}
-.case-card .project-description{font-size:13px;line-height:1.85;margin:0;min-height:48px}
-.case-thumbnail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:21px 0 20px;padding:14px 10px;background:var(--surface);border:1px solid var(--border);border-radius:4px}
-.case-thumbnail>span{display:flex;flex-direction:column;gap:7px;font-size:10px;color:var(--fg);line-height:1.5;position:relative}
-.case-thumbnail>span+span{border-left:1px solid var(--border);padding-left:9px}
-.case-thumbnail small{font-size:9px;color:var(--muted)}
-.case-contribution{flex:1}
-.case-contribution h4{font-size:11px;color:var(--muted);font-weight:500;margin-bottom:9px}
-.case-contribution ul{padding-left:16px;list-style:disc;margin:0}
-.case-contribution li{font-size:12px;line-height:1.85;padding-left:2px;margin:0 0 6px}
-.case-result{display:flex;flex-direction:column;gap:7px;padding:14px 15px;border-left:2px solid var(--accent);background:var(--accent-soft);font-size:12px;line-height:1.8;margin:18px 0 0}
-.case-result>.mono{font-size:9px;letter-spacing:.13em;color:var(--accent)}
-.case-card .case-result{margin-top:16px}
-.case-card .project-bottom{margin-top:21px;padding-top:18px;gap:16px}
-.case-card .project-bottom a{font-size:11px}
-.writing-intro{font-size:13px;color:var(--muted);margin-top:12px}
-.technical-writing{padding-top:57px;padding-bottom:56px}
-.portfolio-contact{display:flex;gap:30px;align-items:center;justify-content:space-between;padding-top:24px;padding-bottom:37px;font-size:13px}
-.portfolio-contact p{color:var(--muted)}
-.portfolio-contact strong{color:var(--fg);font-weight:500}
-.portfolio-contact a{white-space:nowrap;font-size:12px}
-.case-detail{padding-top:42px}
-.case-detail .detail-header{max-width:none;padding-top:29px}
-.case-detail .detail-intro{max-width:760px}
-.case-detail .detail-header>.case-result{max-width:760px;margin-top:20px}
-.case-detail .detail-section{margin-top:48px}
-.case-detail .detail-section>.eyebrow{margin-bottom:12px}
-.case-resource-links{display:flex;flex-wrap:wrap;gap:22px;align-items:center;margin-top:25px;font-size:12px}
-.scope-table{width:100%;border-collapse:collapse;font-size:13px;line-height:1.9;text-align:left}
-.scope-table th,.scope-table td{padding:17px 19px;border-bottom:1px solid var(--border);vertical-align:top}
-.scope-table thead{background:var(--surface);font-size:11px;color:var(--muted)}
-.scope-table th{font-weight:500}
-.scope-table th:first-child{width:17%;padding-left:16px}
-.scope-table td{width:41.5%;color:var(--muted)}
-.scope-table td:last-child{color:var(--fg)}
-.case-architecture{padding:25px;background:var(--card);border:1px solid var(--border);border-radius:5px;margin:0}
-.architecture-legend{display:flex;flex-wrap:wrap;gap:22px;align-items:center;color:var(--muted);font-size:10px;padding-bottom:20px;border-bottom:1px solid var(--border)}
-.architecture-legend>span{display:inline-flex;gap:7px;align-items:center}
-.architecture-legend i{height:9px;width:9px;display:inline-block;border:1px solid var(--border);border-radius:2px}
-.architecture-legend .legend-work{background:var(--accent-soft);border-color:var(--accent)}
-.architecture-legend .legend-upstream{background:var(--surface)}
-.architecture-lane{padding-top:24px}
-.architecture-lane h3{font-size:13px;font-weight:500;margin:0 0 15px}
-.architecture-nodes{display:grid;grid-template-columns:repeat(var(--node-count),minmax(0,1fr));gap:22px}
-.architecture-node{position:relative;padding:15px 12px;border:1px solid var(--border);border-radius:4px;display:flex;flex-direction:column;gap:9px;min-height:122px}
-.architecture-node.node-work{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 38%,var(--border))}
-.architecture-node.node-upstream{background:var(--surface)}
-.architecture-node>.mono{font-size:9px;color:var(--muted)}
-.architecture-node strong{font-size:13px;font-weight:500;line-height:1.5;overflow-wrap:anywhere}
-.architecture-node small{font-size:10px;line-height:1.65;color:var(--muted)}
-.architecture-arrow{position:absolute;right:-18px;top:48px;font-size:14px;color:var(--muted)}
-.architecture-note{font-size:11px;color:var(--muted);line-height:1.8;margin:12px 0 0}
-.case-architecture figcaption{margin-top:24px;padding-top:17px;border-top:1px solid var(--border);font-size:10px;color:var(--muted);line-height:1.8}
-.timeline-source{font-size:12px;line-height:1.9;color:var(--muted);max-width:740px;margin:0 0 22px}
-.case-timeline ol{list-style:none;margin:0;padding:0}
-.case-timeline li{display:grid;grid-template-columns:35px minmax(0,1fr);gap:17px;position:relative}
-.timeline-index{font-size:10px;color:var(--accent);align-self:start;position:relative;padding-top:21px}
-.case-timeline li:not(:last-child)::before{content:"";position:absolute;left:7px;top:45px;bottom:-12px;width:1px;background:var(--border)}
-.case-timeline details{border-top:1px solid var(--border)}
-.case-timeline li:last-child details{border-bottom:1px solid var(--border)}
-.case-timeline summary{cursor:pointer;position:relative;display:flex;flex-wrap:wrap;gap:8px 25px;justify-content:space-between;padding:17px 28px 17px 0;list-style:none}
-.case-timeline summary::-webkit-details-marker,.implementation-details summary::-webkit-details-marker{display:none}
-.case-timeline summary>span{font-size:14px;font-weight:500}
-.case-timeline summary>small{font-size:11px;color:var(--muted);line-height:1.9}
-.case-timeline summary::after,.implementation-details summary::after{content:"+";position:absolute;right:0;color:var(--accent);font-size:18px;line-height:1.2;top:19px}
-.case-timeline details[open]>summary::after,.implementation-details details[open]>summary::after{content:"−"}
-.case-timeline details>p{font-size:12px;line-height:1.9;color:var(--muted);margin:0 0 18px;max-width:720px}
-.implementation-details details{border-top:1px solid var(--border)}
-.implementation-details details:last-child{border-bottom:1px solid var(--border)}
-.implementation-details summary{position:relative;list-style:none;padding:18px 32px 18px 0;font-size:14px;font-weight:500;cursor:pointer}
-.implementation-details p{font-size:13px;line-height:1.95;color:var(--muted);margin:0 0 20px}
-.case-reading{padding:25px 28px;border:1px solid var(--border);border-radius:4px;background:var(--card);margin-top:42px}
-.case-reading h2{font-size:20px;line-height:1.6;margin:12px 0 9px}
-.case-reading h2 a:hover{color:var(--accent)}
-.case-reading>p:last-child{font-size:12px;color:var(--muted)}
-#architecture{scroll-margin-top:110px}
-@media(max-width:1000px){
-  .portfolio-intro{grid-template-columns:minmax(0,1fr) 260px;gap:30px}
-  .intro-direction{font-size:23px}
-  .intro-availability{padding-left:20px}
-  .case-card,.project-index .case-card{padding:24px 22px}
-  .case-card h3{font-size:23px}
-  .architecture-nodes{gap:18px}
-  .architecture-node{padding:13px 10px}
-  .architecture-arrow{right:-16px}
+/* Functional project documentation; the site typography is defined in global.css. */
+.case-resource-links { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 21px; font-size: 13px; }
+.scope-table, .comparison-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; line-height: 1.9; }
+.scope-table th, .scope-table td, .comparison-table th, .comparison-table td { padding: 13px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.scope-table th, .comparison-table th { font-weight: 500; }
+.scope-table thead, .comparison-table thead { color: var(--muted); }
+.scope-table th:first-child { width: 17%; padding-left: 0; }
+.scope-table td { width: 41.5%; }
+.scope-table td:last-child { padding-right: 0; }
+.comparison-table caption { text-align: left; padding-bottom: 12px; font-size: 12px; color: var(--muted); }
+.comparison-table td { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.comparison-wrap { max-width: 100%; overflow-x: auto; }
+.experiment-note { font-size: 13px; color: var(--muted); line-height: 1.95; margin-top: 16px; }
+.case-architecture { margin: 0; padding: 21px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.architecture-legend { display: flex; flex-wrap: wrap; gap: 18px; color: var(--muted); font-size: 12px; }
+.architecture-legend > span { display: inline-flex; align-items: center; gap: 7px; }
+.architecture-legend i { width: 13px; height: 10px; display: inline-block; }
+.legend-work { border: 1px solid var(--muted); }
+.legend-upstream { border: 1px dashed var(--muted); }
+.architecture-lane { margin-top: 23px; }
+.architecture-lane h3 { font-size: 14px; font-weight: 500; margin-bottom: 13px; }
+.architecture-nodes { display: grid; grid-template-columns: repeat(var(--node-count), minmax(0, 1fr)); gap: 20px; }
+.architecture-node { position: relative; border: 1px solid var(--muted); padding: 14px 12px; min-height: 92px; display: flex; flex-direction: column; justify-content: center; gap: 7px; }
+.architecture-node.node-upstream { border: 1px dashed var(--muted); }
+.architecture-node strong { font-size: 13px; line-height: 1.6; font-weight: 500; overflow-wrap: anywhere; }
+.architecture-node small { font-size: 11px; line-height: 1.75; color: var(--muted); }
+.architecture-arrow { position: absolute; top: calc(50% - 13px); right: -17px; font-size: 14px; color: var(--muted); }
+.architecture-note { color: var(--muted); font-size: 12px; line-height: 1.9; margin-top: 11px; }
+.case-architecture figcaption { font-size: 11px; color: var(--muted); margin-top: 20px; }
+.timeline-source { font-size: 13px; line-height: 1.95; color: var(--muted); margin-bottom: 18px; }
+.case-timeline ol { list-style: decimal; padding-left: 23px; margin: 0; }
+.case-timeline li { padding-left: 5px; }
+.case-timeline li::marker { font-size: 12px; color: var(--muted); }
+.case-timeline details { border-bottom: 1px solid var(--border); }
+.case-timeline summary { cursor: pointer; padding: 13px 0; list-style: revert; }
+.case-timeline summary > span { font-size: 14px; font-weight: 500; }
+.case-timeline summary > small { display: block; font-size: 12px; color: var(--muted); margin-top: 5px; line-height: 1.8; }
+.case-timeline details > p { font-size: 13px; line-height: 1.95; color: var(--muted); margin: 0 0 15px; }
+.evidence-list { border-top: 1px solid var(--border); }
+.evidence-list > div { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 22px; padding: 15px 0; border-bottom: 1px solid var(--border); }
+.evidence-list dt { font-size: 13px; }
+.evidence-list dd { font-size: 13px; }
+.evidence-list dd strong { font-size: 15px; font-weight: 500; }
+.evidence-list dd p { margin-top: 4px; color: var(--muted); }
+.implementation-details details { border-bottom: 1px solid var(--border); }
+.implementation-details details:first-child { border-top: 1px solid var(--border); }
+.implementation-details summary { list-style: revert; cursor: pointer; padding: 14px 0; font-size: 14px; font-weight: 500; }
+.implementation-details p { font-size: 14px; line-height: 1.95; color: var(--muted); margin-bottom: 19px; }
+.case-reading { padding-top: 24px; border-top: 1px solid var(--border); margin-top: 33px; }
+.case-reading h2 { font-size: 18px; margin-bottom: 12px; }
+.case-reading a { display: inline-block; font-size: 14px; }
+@media (max-width: 600px) {
+  .scope-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .scope-table, .scope-table tbody, .scope-table tr, .scope-table th, .scope-table td { display: block; width: auto; }
+  .scope-table tr { border-top: 1px solid var(--border); padding: 17px 0; }
+  .scope-table th, .scope-table td { border: 0; padding: 0; font-size: 13px; }
+  .scope-table th:first-child { width: auto; padding: 0; font-size: 14px; margin-bottom: 13px; }
+  .scope-table td + td { margin-top: 12px; }
+  .scope-table td::before { display: block; color: var(--muted); font-size: 11px; margin-bottom: 4px; }
+  .scope-table td:nth-child(2)::before { content: "沿用的基础"; }
+  .scope-table td:nth-child(3)::before { content: "我的工作"; }
+  .architecture-nodes { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .architecture-nodes.has-sequence { grid-template-columns: 1fr; gap: 23px; }
+  .architecture-node { padding: 13px 15px; min-height: 80px; }
+  .architecture-arrow { top: auto; bottom: -23px; right: 50%; transform: rotate(90deg); font-size: 15px; }
+  .evidence-list > div { grid-template-columns: 1fr; gap: 6px; padding: 15px 0; }
+  .evidence-list dt { color: var(--muted); }
+  .case-resource-links { gap: 9px 18px; font-size: 12px; }
 }
-@media(max-width:759px){
-  .portfolio-intro{grid-template-columns:1fr;gap:24px;padding-top:33px;padding-bottom:30px}
-  .portfolio-intro h1{font-size:36px}
-  .intro-direction{font-size:23px;line-height:1.45;margin-top:11px}
-  .intro-description{font-size:13px;margin-top:16px}
-  .intro-links{font-size:11px;gap:17px}
-  .intro-availability{padding:17px 19px;border:1px solid var(--border);border-radius:4px;background:var(--surface)}
-  .intro-availability .eyebrow{margin-bottom:8px}
-  .intro-availability strong{font-size:14px}
-  .intro-availability p:not(.eyebrow){display:none}
-  .intro-availability a{display:inline-block;font-size:11px;margin-left:12px}
-  .selected-cases{padding-top:14px}
-  .selected-cases h2,.technical-writing h2{font-size:25px}
-  .selected-cases .section-heading>.text-link{margin-top:28px}
-  .case-card,.project-index .case-card{padding:23px 21px}
-  .case-card h3{font-size:24px}
-  .case-card .project-description{min-height:0}
-  .case-thumbnail{gap:4px;padding:13px 8px;margin:19px 0}
-  .case-thumbnail>span{font-size:9px}
-  .case-thumbnail>span+span{padding-left:7px}
-  .case-contribution li{font-size:12px}
-  .technical-writing{padding-top:43px;padding-bottom:31px}
-  .portfolio-contact{flex-direction:column;align-items:start;gap:15px;padding-top:18px;padding-bottom:32px;font-size:12px}
-  .case-detail{padding-top:30px}
-  .case-detail .detail-header{padding-top:25px}
-  .case-detail .detail-section{margin-top:37px}
-  .case-resource-links{gap:14px 20px;font-size:11px}
-  .scope-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
-  .scope-table,.scope-table tbody,.scope-table tr,.scope-table th,.scope-table td{display:block;width:auto}
-  .scope-table tr{border:1px solid var(--border);border-radius:4px;margin-bottom:14px;padding:16px 17px}
-  .scope-table th,.scope-table td{border:0;padding:0;font-size:12px}
-  .scope-table th:first-child{width:auto;padding:0;font-size:14px;margin-bottom:15px}
-  .scope-table td+td{margin-top:14px}
-  .scope-table td::before{display:block;color:var(--muted);font-size:10px;margin-bottom:4px}
-  .scope-table td:nth-child(2)::before{content:"沿用的基线 / 组件"}
-  .scope-table td:nth-child(3)::before{content:"本项目的工作"}
-  .case-architecture{padding:18px 16px}
-  .architecture-legend{gap:12px;font-size:9px}
-  .architecture-nodes{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-  .architecture-nodes.has-sequence{grid-template-columns:1fr;gap:25px}
-  .architecture-node{min-height:103px;padding:13px 15px;gap:7px}
-  .architecture-node strong{font-size:13px}
-  .architecture-arrow{top:auto;bottom:-24px;right:50%;transform:rotate(90deg);font-size:16px}
-  .case-timeline li{grid-template-columns:25px minmax(0,1fr);gap:10px}
-  .case-timeline summary{flex-direction:column;gap:5px}
-  .case-timeline summary>small{font-size:10px;line-height:1.8}
-  .case-reading{padding:21px 19px}
-  .case-reading h2{font-size:18px}
+@media print {
+  .architecture-nodes.has-sequence { grid-template-columns: repeat(var(--node-count), minmax(0, 1fr)); }
+  .architecture-arrow { display: none; }
 }
-@media print{.case-timeline details>p,.implementation-details details>p{display:block!important}.architecture-nodes.has-sequence{grid-template-columns:repeat(var(--node-count),minmax(0,1fr))}.architecture-arrow{display:none}.intro-availability{display:none}.portfolio-intro{display:block}}

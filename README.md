@@ -20,10 +20,12 @@ npm run preview
 
 ## 内容维护
 
-- `src/data/resume.ts`：个人资料、经历与技能。文件开头的 `backendInternship` 同时更新实习经历和数据集平台项目，避免重复维护。
-- `src/data/projects.ts`：Shopping SFT + GRPO、Enterprise Agent 的介绍、具体改动和结果。`highlights` 更新卡片亮点，`decisions` 更新实现，`evidence` 更新执行证据，`comparisons` 更新对照表；`featured` 控制是否在首页和主要项目列表展示。`link` 可省略。
+- `src/data/resume.ts`：个人资料、经历与技能；`introduction` 是首页的自我介绍，`about` 是经历页简介。文件开头的 `backendInternship` 同时更新实习经历和数据集平台项目，避免重复维护。
+- `src/data/projects.ts`：Shopping SFT + GRPO、Enterprise Agent 的具体改动和结果。`decisions` 更新实现，`evidence` 更新执行记录，`comparisons` 更新对照表；`featured` 控制是否在首页和主要项目列表展示。`link` 可省略。
+- `src/data/case-studies.ts`：项目列表的简介、个人工作与当前进展，以及详情页的架构和执行记录。
 - `src/content/blog/`：公开文章。`draft: true` 的文章不会生成页面。
 - `src/styles/global.css`：主题、响应式布局、文章排版与打印样式。
+- `src/styles/case-studies.css`：项目详情中的架构、对照表和展开内容。
 
 会话导出、私人交接、面试准备和密钥不进入公开仓库。
 

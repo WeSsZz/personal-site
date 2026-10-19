@@ -25,9 +25,9 @@ export interface CaseStudy {
 
 export const caseStudies: Record<string, CaseStudy> = {
   'shopping-sft-grpo': {
-    role: '上游复现 / 独立接入实验',
-    summary: '把购物 Agent 的执行轨迹接入训练：从 SFT / GRPO 基线，推进 Pi + slime 工具桥、样本有效性检查和生成概率审计。',
-    contributions: ['连接 Pi 执行循环与 slime 轨迹接口，核对生成 token、logprob 和 mask。', '分别检查执行协议、失败训练信号与已有权重的购物表现。'],
+    role: '开源复现与独立扩展',
+    summary: '我先复现了购物 Agent 的 SFT / GRPO 训练流程，再将 Pi 的执行轨迹接入 slime，重点处理工具执行协议、样本有效性，以及采样与训练之间的数据对齐。',
+    contributions: ['实现购物工具桥与轨迹适配，逐项核对生成 token、logprob 和训练 mask。', '通过运行时对照和失败反馈消融，区分执行机制的影响与训练收益。'],
     result: 'Pi + slime 已核验 1 次真实 GRPO 参数更新、checkpoint 保存与 SGLang 权重同步。',
     thumbnail: ['Pi Agent', '轨迹适配', 'GRPO 更新', '权重同步'],
     scope: [
@@ -67,9 +67,9 @@ export const caseStudies: Record<string, CaseStudy> = {
     article: { slug: 'pi-slime-trajectory-alignment', label: '从 Agent 轨迹到可训练样本' },
   },
   'enterprise-agent': {
-    role: 'Runtime 实现 / 对照实验',
-    summary: '实现可恢复的企业调查 Harness：让模型依据证据调用工具，让运行时管理进展、上下文预算和暂停恢复。',
-    contributions: ['实现风险路由、内容进展检测、Working / Episodic Memory 和上下文投影。', '将预算、内容指纹、审批及幂等语义接入持久化任务状态。'],
+    role: '执行框架实现与评测',
+    summary: '我围绕企业运维调查实现了一套 Agent 执行框架。模型负责根据证据选择工具，运行时负责判断调查是否有进展，并管理上下文、任务状态与暂停恢复。',
+    contributions: ['实现 Harness 风险路由、内容进展检测，以及 Working / Episodic Memory 的上下文组织。', '持久化保存预算、内容指纹和审批状态，使恢复后的任务延续原有约束。'],
     result: '4 种编排模式共享任务生命周期；调查可暂停恢复，预算与去重状态延续。',
     thumbnail: ['Harness 路由', '上下文组织', '受控工具', '持久化状态'],
     scope: [

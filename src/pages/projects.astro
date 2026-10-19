@@ -1,13 +1,14 @@
 ---
-import Layout from '../layouts/Layout.astro';import ProjectCard from '../components/ProjectCard.astro';import { projects, featuredProjects } from '../data/projects';import {withBase} from '../lib/urls';
-const categories=['全部项目',...new Set(featuredProjects.map(p=>p.category))];
-const supportingProjects=projects.filter(p=>!p.featured);
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { projects, featuredProjects } from '../data/projects';
+import { withBase } from '../lib/urls';
+const supportingProjects = projects.filter(project => !project.featured);
 ---
-<Layout title="Agent 项目" description="周骏炜的 LLM Agent 项目：Adaptive Harness、Context Engineering、Durable Runtime，以及购物 Agent 的 SFT / GRPO 与 Pi + slime 接入。"><section class="section container"><div class="page-heading"><p class="eyebrow">AGENT SYSTEMS & POST-TRAINING</p><h1>Agent 项目与实验<span class="accent">。</span></h1><p>从 Harness 和上下文组织，到可训练轨迹与策略更新，展示具体实现、改动和验证依据。</p></div>
-<div class="filters" role="group" aria-label="按项目方向筛选">{categories.map((c,i)=><button type="button" class="filter-button" data-filter={c} aria-pressed={i===0?'true':'false'}>{c}<span>{i===0?featuredProjects.length:featuredProjects.filter(p=>p.category===c).length}</span></button>)}</div><p class="sr-only" id="filter-status" role="status" aria-live="polite"></p><div class="project-grid project-index">{featuredProjects.map(p=><ProjectCard project={p}/>)}</div>
-<aside class="supporting-work"><div><p class="eyebrow">ENGINEERING EXPERIENCE</p><h2>工程实践</h2><p>后端实习中的任务管理与文件传输经验，作为 Agent 工程的基础。</p></div><div>{supportingProjects.map(p=><a class="text-link" href={withBase(`projects/${p.slug}/`)}>{p.name} · 实习实践 ↗</a>)}</div></aside>
-</section></Layout>
-<script>
-const buttons=document.querySelectorAll<HTMLButtonElement>('[data-filter]');const cards=document.querySelectorAll<HTMLElement>('[data-category]');
-buttons.forEach(button=>button.addEventListener('click',()=>{let count=0;buttons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));cards.forEach(c=>{c.hidden=button.dataset.filter!=='全部项目'&&c.dataset.category!==button.dataset.filter;if(!c.hidden)count++;});const status=document.querySelector('#filter-status');if(status)status.textContent=`显示 ${count} 个项目`;}));
-</script>
+<Layout title="项目" description="购物 Agent 后训练与 Enterprise Agent：项目背景、个人实现、实验记录与技术笔记。">
+  <section class="section container">
+    <header class="page-heading"><h1>项目</h1><p>这里记录我在 Agent 后训练和执行框架上的工作。每个项目都注明已有基础、我的实现，以及目前能够支持的结论。</p></header>
+    <div class="project-list project-index">{featuredProjects.map(project => <ProjectCard project={project}/>)}</div>
+    <aside class="supporting-work"><h2>实习中的工程实践</h2><p>此外，我在后端实习中参与过文件传输、任务管理与审批链路的开发。</p>{supportingProjects.map(project => <a href={withBase(`projects/${project.slug}/`)}>{project.name}</a>)}</aside>
+  </section>
+</Layout>

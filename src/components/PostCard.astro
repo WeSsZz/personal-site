@@ -4,5 +4,7 @@ import { withBase } from '../lib/urls';
 export interface Props { post: CollectionEntry<'blog'>; }
 const { post } = Astro.props;
 ---
-<article class="post-card post-item" data-search={`${post.data.title} ${post.data.description} ${post.data.tags.join(' ')}`}><div class="post-meta"><time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('zh-CN',{timeZone:'UTC',year:'numeric',month:'2-digit',day:'2-digit'})}</time><span>{post.data.tags[0]}</span></div>
-<h3><a href={withBase(`blog/${post.id}/`)}>{post.data.title}<span aria-hidden="true">↗</span></a></h3><p>{post.data.description}</p><div class="tags">{post.data.tags.map(t => <span>{t}</span>)}</div></article>
+<article class="post-entry post-item" data-search={`${post.data.title} ${post.data.description} ${post.data.tags.join(' ')}`}>
+  <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('zh-CN',{timeZone:'UTC',year:'numeric',month:'2-digit',day:'2-digit'})}</time>
+  <div><h3><a href={withBase(`blog/${post.id}/`)}>{post.data.title}</a></h3><p>{post.data.description}</p></div>
+</article>

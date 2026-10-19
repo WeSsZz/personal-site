@@ -1,11 +1,25 @@
 ---
-import Layout from '../layouts/Layout.astro';import {resume} from '../data/resume';import {featuredProjects} from '../data/projects';import {withBase} from '../lib/urls';
-const skills=[['Agent Harness / Runtime',resume.skills.harness],['Context Engineering',resume.skills.context],['后训练与评测',resume.skills.postTraining],['工程基础',resume.skills.foundation]];
+import Layout from '../layouts/Layout.astro';
+import { resume } from '../data/resume';
+import { withBase } from '../lib/urls';
+const skills: [string, string[]][] = [
+  ['Agent 执行框架', resume.skills.harness],
+  ['上下文与记忆', resume.skills.context],
+  ['后训练与评测', resume.skills.postTraining],
+  ['工程基础', resume.skills.foundation],
+];
 ---
-<Layout title="关于我" description="周骏炜寻求 LLM Agent 算法 / 工程实习，聚焦 Agent Harness、Context Engineering、可恢复 Runtime 与 Agentic RL 后训练。"><section class="section container"><div class="about-intro"><div class="page-heading"><p class="eyebrow">LLM AGENT / ALGORITHMS & ENGINEERING</p><h1>面向 LLM Agent，<br/>做算法与工程<span class="accent">。</span></h1><p class="bio">{resume.about}</p></div><aside class="contact-card"><h2>实习与项目交流</h2><p>{resume.location}</p><a href={`mailto:${resume.email}`}>{resume.email} ↗</a><a href={resume.github} target="_blank" rel="noopener noreferrer">GitHub / WeSsZz ↗</a><button class="button print-button" id="print-resume" type="button">打印经历页 ↓</button></aside></div>
-<section class="resume-block"><h2>技术方向</h2><div class="skills-grid">{skills.map(([name,tags])=><div><h3>{name}</h3><div class="tags">{(tags as string[]).map(t=><span>{t}</span>)}</div></div>)}</div></section>
-<section class="resume-block"><h2>Agent 实践</h2><div>{featuredProjects.map(p=><div class="timeline-item"><h3><a href={withBase(`projects/${p.slug}/`)}>{p.name} ↗</a></h3><p class="timeline-subtitle">{p.subtitle}</p><p class="timeline-description">{p.description}</p><ul class="project-highlights">{p.highlights?.map(item=><li>{item}</li>)}</ul></div>)}</div></section>
-<section class="resume-block"><h2>教育背景</h2><div>{resume.education.map(e=><div class="timeline-item"><div class="timeline-head"><h3>{e.school}</h3><time>{e.period}</time></div><p class="timeline-subtitle">{e.degree}</p><p class="timeline-description">{e.description}</p></div>)}</div></section>
-<section class="resume-block"><h2>工程经历</h2><div>{resume.experience.map(e=><div class="timeline-item"><div class="timeline-head"><h3>{e.company}</h3><time>{e.period}</time></div><p class="timeline-subtitle">{e.role} · {e.projectName}</p><p class="timeline-description">{e.description}</p><details class="experience-details"><summary>查看后端实习细节</summary><ul class="experience-highlights">{e.highlights.map(([title,text])=><li><strong>{title}</strong><p>{text}</p></li>)}</ul><a class="text-link experience-link" href={withBase('projects/dataset-platform/')}>查看完整工程实践 →</a></details></div>)}</div></section>
-<section class="resume-block"><h2>{resume.publications.length ? '论文与获奖' : '获奖'}</h2><div>{resume.publications.map(p=><div class="timeline-item"><h3 class="publication-title">{p.title}</h3><p class="publication-meta">{p.venue}</p><p class="publication-meta">ISBN {p.isbn}</p></div>)}{resume.awards.map(a=><div class="timeline-item"><div class="timeline-head"><h3>{a.title}</h3><time>{a.date}</time></div></div>)}</div></section></section></Layout>
-<script>document.querySelector('#print-resume')?.addEventListener('click',()=>window.print());</script>
+<Layout title="关于我" description={resume.about}>
+  <article class="section container">
+    <header class="page-heading about-intro">
+      <h1>关于我</h1>
+      <p class="bio">{resume.about}</p>
+      <div class="profile-links"><span>{resume.location}</span><a href={`mailto:${resume.email}`}>邮箱</a><a href={resume.github} target="_blank" rel="noopener noreferrer">GitHub</a><button class="print-button" id="print-resume" type="button">打印本页</button></div>
+    </header>
+    <section class="resume-block"><h2>教育背景</h2><div>{resume.education.map(education => <div class="timeline-item"><div class="timeline-head"><h3>{education.school}</h3><time>{education.period}</time></div><p class="timeline-subtitle">{education.degree}</p><p class="timeline-description">{education.description}</p></div>)}</div></section>
+    <section class="resume-block"><h2>技术与实践</h2><dl class="skills-list">{skills.map(([name,items]) => <div><dt>{name}</dt><dd>{items.join('、')}</dd></div>)}</dl></section>
+    <section class="resume-block"><h2>实习经历</h2><div>{resume.experience.map(experience => <div class="timeline-item"><div class="timeline-head"><h3>{experience.company}</h3><time>{experience.period}</time></div><p class="timeline-subtitle">{experience.role} · {experience.projectName}</p><p class="timeline-description">{experience.description}</p><details class="experience-details"><summary>工作内容</summary><ul class="experience-highlights">{experience.highlights.map(([title,text]) => <li><strong>{title}</strong><p>{text}</p></li>)}</ul><a class="experience-link" href={withBase('projects/dataset-platform/')}>项目说明</a></details></div>)}</div></section>
+    <section class="resume-block"><h2>{resume.publications.length ? '论文与获奖' : '获奖'}</h2><div>{resume.publications.map(publication => <div class="timeline-item"><h3>{publication.title}</h3><p class="publication-meta">{publication.venue}</p><p class="publication-meta">ISBN {publication.isbn}</p></div>)}{resume.awards.map(award => <div class="timeline-item"><div class="timeline-head"><h3>{award.title}</h3><time>{award.date}</time></div></div>)}</div></section>
+  </article>
+</Layout>
+<script>document.querySelector('#print-resume')?.addEventListener('click', () => window.print());</script>

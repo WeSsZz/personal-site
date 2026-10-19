@@ -4,20 +4,19 @@ import Hero from '../components/Hero.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import PostCard from '../components/PostCard.astro';
 import { featuredProjects } from '../data/projects';
-import { resume } from '../data/resume';
 import { withBase } from '../lib/urls';
 import { getCollection } from 'astro:content';
-const posts=(await getCollection('blog')).filter(p=>!p.data.draft).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf()).slice(0,2);
+const posts = (await getCollection('blog')).filter(post => !post.data.draft)
+  .sort((a,b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0,2);
 ---
 <Layout>
   <Hero/>
-  <section class="selected-cases container" aria-labelledby="selected-heading">
-    <div class="section-heading"><div><p class="eyebrow">SELECTED WORK / 01—02</p><h2 id="selected-heading">代表项目<span class="accent">。</span></h2></div><a class="text-link" href={withBase('projects/')}>全部项目 ↗</a></div>
-    <div class="project-grid agent-project-grid">{featuredProjects.map(p=><ProjectCard project={p}/>)}</div>
+  <section class="home-section container" aria-labelledby="projects-heading">
+    <div class="section-heading"><h2 id="projects-heading">项目</h2><a href={withBase('projects/')}>全部项目</a></div>
+    <div class="project-list">{featuredProjects.map(project => <ProjectCard project={project}/>)}</div>
   </section>
-  <section class="section container technical-writing" aria-labelledby="writing-heading">
-    <div class="section-heading"><div><p class="eyebrow">IMPLEMENTATION NOTES</p><h2 id="writing-heading">实现笔记<span class="accent">。</span></h2><p class="writing-intro">把接口约束、设计取舍与实验边界写清楚。</p></div><a class="text-link" href={withBase('blog/')}>所有文章 ↗</a></div>
-    <div class="post-grid">{posts.map(post=><PostCard post={post}/>)}</div>
+  <section class="home-section writing-section container" aria-labelledby="writing-heading">
+    <div class="section-heading"><h2 id="writing-heading">最近的笔记</h2><a href={withBase('blog/')}>全部文章</a></div>
+    <div class="post-list">{posts.map(post => <PostCard post={post}/>)}</div>
   </section>
-  <section class="portfolio-contact container"><p>正在寻找 <strong>LLM Agent 算法 / 工程实习</strong>，欢迎交流项目与岗位。</p><a class="text-link" href={`mailto:${resume.email}`}>{resume.email} ↗</a></section>
 </Layout>

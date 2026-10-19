@@ -1,5 +1,9 @@
 ---
 import { resume } from '../data/resume';
-import { withBase } from '../lib/urls';
 ---
-<footer class="site-footer"><div class="container footer-inner"><div><a class="monogram" href={withBase('')}>JW<span>.</span></a><p>持续构建，也持续记录。</p></div><div class="footer-links"><a href={resume.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href={`mailto:${resume.email}`}>邮件联系 ↗</a><a href={withBase('about/')}>关于我 →</a></div><p class="copyright">© {new Date().getFullYear()} {resume.name}<br/>Built with care, powered by Astro.</p></div></footer>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© {new Date().getFullYear()} {resume.name}</p>
+    <a href={`mailto:${resume.email}`}>{resume.email}</a>
+  </div>
+</footer>

@@ -1,9 +1,35 @@
 ---
-import Layout from '../../layouts/Layout.astro';import PostCard from '../../components/PostCard.astro';import {getCollection} from 'astro:content';
-const posts=(await getCollection('blog')).filter(p=>!p.data.draft).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
+import Layout from '../../layouts/Layout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('blog')).filter(post => !post.data.draft)
+  .sort((a,b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
-<Layout title="文章" description="关于工程实践、个人成长与技术学习的公开记录。"><section class="section container"><div class="page-heading"><p class="eyebrow">WRITING & REFLECTION</p><h1>记录，思考，继续构建<span class="accent">。</span></h1><p>整理学习过程中的判断，也记录项目之外的思考。</p></div><div class="search-row"><label class="sr-only" for="post-search">搜索文章标题、简介或标签</label><input class="search-input" id="post-search" type="search" placeholder="搜索标题、简介或标签…" autocomplete="off"/><p class="search-count" id="post-count" role="status" aria-live="polite">{posts.length} 篇文章</p></div><div class="post-grid">{posts.map(post=><PostCard post={post}/>)}</div><p class="empty-state" id="post-empty" hidden>没有匹配的文章。试试其他关键词。</p></section></Layout>
+<Layout title="文章" description="项目实现、实验结果与学习过程中的公开笔记。">
+  <section class="section container">
+    <header class="page-heading"><h1>文章与笔记</h1><p>记录做项目时遇到的问题、采取的办法，以及还没有解决的部分。</p></header>
+    <div class="search-row">
+      <label class="sr-only" for="post-search">搜索文章标题、简介或标签</label>
+      <input class="search-input" id="post-search" type="search" placeholder="搜索文章" autocomplete="off"/>
+      <p class="search-count" id="post-count" role="status" aria-live="polite">{posts.length} 篇文章</p>
+    </div>
+    <div class="post-list">{posts.map(post => <PostCard post={post}/>)}</div>
+    <p class="empty-state" id="post-empty" hidden>没有匹配的文章。</p>
+  </section>
+</Layout>
 <script>
-const search=document.querySelector<HTMLInputElement>('#post-search');const items=document.querySelectorAll<HTMLElement>('.post-item');
-search?.addEventListener('input',()=>{const query=search.value.trim().toLocaleLowerCase();let count=0;items.forEach(item=>{item.hidden=!(item.dataset.search??'').toLocaleLowerCase().includes(query);if(!item.hidden)count++;});const counter=document.querySelector('#post-count');if(counter)counter.textContent=`${count} 篇文章`;const empty=document.querySelector<HTMLElement>('#post-empty');if(empty)empty.hidden=count!==0;});
+const search = document.querySelector<HTMLInputElement>('#post-search');
+const items = document.querySelectorAll<HTMLElement>('.post-item');
+search?.addEventListener('input', () => {
+  const query = search.value.trim().toLocaleLowerCase();
+  let count = 0;
+  items.forEach(item => {
+    item.hidden = !(item.dataset.search ?? '').toLocaleLowerCase().includes(query);
+    if (!item.hidden) count++;
+  });
+  const counter = document.querySelector('#post-count');
+  if (counter) counter.textContent = `${count} 篇文章`;
+  const empty = document.querySelector<HTMLElement>('#post-empty');
+  if (empty) empty.hidden = count !== 0;
+});
 </script>

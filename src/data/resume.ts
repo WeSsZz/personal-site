@@ -19,6 +19,10 @@ export const backendInternship = {
 export const resume = {
   name: '周骏炜',
   title: 'LLM Agent 算法 / 工程',
+  introduction: [
+    '我目前在香港中文大学攻读人工智能（科学应用）硕士，本科就读于南京邮电大学数据科学与大数据技术专业。',
+    '最近主要在做两个 Agent 项目：一套用于企业运维调查的执行框架，以及购物 Agent 的 SFT / GRPO 后训练实验。我关注模型如何使用工具、管理上下文，以及如何从执行轨迹中得到可靠的训练信号。',
+  ],
   tagline:
     '香港中文大学人工智能硕士在读，寻求 LLM Agent 算法 / 工程实习。聚焦 Agent Harness、Context Engineering 与 Agentic RL 后训练，当前实践包括企业调查 Runtime 和购物 Agent 的训练、轨迹适配与执行协议对齐。',
   email: '13506237957@163.com',

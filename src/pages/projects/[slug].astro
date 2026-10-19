@@ -5,40 +5,41 @@ import { caseStudies } from '../../data/case-studies';
 import CaseArchitecture from '../../components/CaseArchitecture.astro';
 import CaseTimeline from '../../components/CaseTimeline.astro';
 import { withBase } from '../../lib/urls';
-export function getStaticPaths(){return projects.map(project=>({params:{slug:project.slug},props:{project}}));}
-const {project:p}=Astro.props;
-const study=caseStudies[p.slug];
+export function getStaticPaths() {
+  return projects.map(project => ({params:{slug:project.slug},props:{project}}));
+}
+const { project: p } = Astro.props;
+const study = caseStudies[p.slug];
 ---
 <Layout title={p.name} description={study?.summary || p.description}>
-  <article class:list={['section', 'container', 'project-detail', {'case-detail':!!study}]}>
-    <a class="text-link" href={withBase('projects/')}>← 返回项目列表</a>
+  <article class="section container project-detail">
+    <a class="back-link" href={withBase('projects/')}>返回项目列表</a>
     <header class="detail-header">
-      <div class="eyebrow">PROJECT / {p.number} <span>{p.category}</span></div>
       <h1>{p.name}</h1>
       <p class="detail-subtitle">{study?.role || p.subtitle}</p>
       <p class="detail-intro">{study?.summary || p.description}</p>
-      {study && <p class="case-result"><span class="mono">VERIFIED</span>{study.result}</p>}
-      <div class="case-resource-links">
-        {study && <><a class="text-link" href="#architecture">架构与执行 ↓</a><a class="text-link" href={withBase(study.report.path)} target="_blank" rel="noopener noreferrer">{study.report.label} ↗</a></>}
-        {p.link && <a class="source-link" href={p.link} target="_blank" rel="noopener noreferrer">{p.sourceLabel} ↗</a>}
-      </div>
+      {study && <p class="detail-progress"><strong>当前进展：</strong>{study.result}</p>}
+      <nav class="case-resource-links" aria-label="项目资料">
+        {study && <><a href="#architecture">系统结构</a><a href={withBase(study.report.path)} target="_blank" rel="noopener noreferrer">{study.report.label}</a></>}
+        {p.link && <a href={p.link} target="_blank" rel="noopener noreferrer">{p.sourceLabel}</a>}
+      </nav>
     </header>
-    {study ? <>
-      <section class="detail-section contribution-scope" aria-labelledby="scope-heading">
-        <p class="eyebrow">BASELINE → CONTRIBUTION</p><h2 id="scope-heading">项目从哪里开始，我改了什么</h2>
-        <div class="scope-table-wrap"><table class="scope-table"><thead><tr><th scope="col">部分</th><th scope="col">沿用的基线 / 组件</th><th scope="col">本项目的工作</th></tr></thead><tbody>{study.scope.map(row=><tr><th scope="row">{row.area}</th><td>{row.baseline}</td><td>{row.change}</td></tr>)}</tbody></table></div>
+    {study && <>
+      <section class="detail-section" aria-labelledby="scope-heading">
+        <h2 id="scope-heading">项目基础与我的工作</h2>
+        <div class="scope-table-wrap"><table class="scope-table"><thead><tr><th scope="col">部分</th><th scope="col">沿用的基础</th><th scope="col">我的工作</th></tr></thead><tbody>{study.scope.map(row => <tr><th scope="row">{row.area}</th><td>{row.baseline}</td><td>{row.change}</td></tr>)}</tbody></table></div>
       </section>
-      <section class="detail-section" id="architecture" aria-labelledby="architecture-heading"><p class="eyebrow">SYSTEM DESIGN</p><h2 id="architecture-heading">组件如何连接</h2><CaseArchitecture study={study}/></section>
-      <section class="detail-section" aria-labelledby="timeline-heading"><p class="eyebrow">EXECUTION / STEP BY STEP</p><h2 id="timeline-heading">{study.timeline.title}</h2><CaseTimeline study={study}/></section>
-    </> : <div class="project-flow" aria-label="项目关键流程">{p.flow.map((item,i)=><div><span class="mono">0{i+1}</span><strong>{item}</strong>{i<p.flow.length-1 && <span class="flow-arrow" aria-hidden="true">→</span>}</div>)}</div>}
-    {p.evidence && <section class="detail-section" aria-labelledby="evidence-heading"><p class="eyebrow">VALIDATION</p><h2 id="evidence-heading">已核验的执行证据</h2><div class="evidence-grid">{p.evidence.map(item=><div><strong class="evidence-value">{item.value}</strong><h3>{item.label}</h3><p>{item.note}</p></div>)}</div></section>}
-    {p.comparisons?.map((comparison,index)=><section class="detail-section experiment-results" aria-labelledby={`comparison-${index}`}><h2 id={`comparison-${index}`}>{comparison.title}</h2><table class="comparison-table"><caption>{comparison.caption}</caption><thead><tr>{comparison.columns.map(column=><th scope="col">{column}</th>)}</tr></thead><tbody>{comparison.rows.map(row=><tr><th scope="row">{row.name}</th><td>{row.success}</td></tr>)}</tbody></table><p class="experiment-note">{comparison.note}</p></section>)}
-    <div class="detail-section result-section"><div><p class="eyebrow">CURRENT STATE</p><h2>{p.status}</h2></div><p>{p.outcome}</p></div>
+      <section class="detail-section" id="architecture" aria-labelledby="architecture-heading"><h2 id="architecture-heading">系统结构</h2><CaseArchitecture study={study}/></section>
+      <section class="detail-section" aria-labelledby="timeline-heading"><h2 id="timeline-heading">{study.timeline.title}</h2><CaseTimeline study={study}/></section>
+    </>}
+    {p.evidence && <section class="detail-section" aria-labelledby="evidence-heading"><h2 id="evidence-heading">验证记录</h2><dl class="evidence-list">{p.evidence.map(item => <div><dt>{item.label}</dt><dd><strong>{item.value}</strong><p>{item.note}</p></dd></div>)}</dl></section>}
+    {p.comparisons?.map((comparison,index) => <section class="detail-section experiment-results" aria-labelledby={`comparison-${index}`}><h2 id={`comparison-${index}`}>{comparison.title}</h2><div class="comparison-wrap"><table class="comparison-table"><caption>{comparison.caption}</caption><thead><tr>{comparison.columns.map(column => <th scope="col">{column}</th>)}</tr></thead><tbody>{comparison.rows.map(row => <tr><th scope="row">{row.name}</th><td>{row.success}</td></tr>)}</tbody></table></div><p class="experiment-note">{comparison.note}</p></section>)}
+    <section class="detail-section"><h2>进展与后续工作</h2><p>{p.outcome}</p></section>
     <section class="detail-section">
-      <h2>{study ? '实现细节与取舍' : '设计与实现'}</h2>
-      {study ? <div class="implementation-details"><details><summary>要解决的问题</summary><p>{p.challenge}</p></details>{p.decisions.map(([title,text])=><details><summary>{title}</summary><p>{text}</p></details>)}</div> : <><p>{p.challenge}</p><div class="decision-list">{p.decisions.map(([title,text],i)=><div><span class="mono">0{i+1}</span><h3>{title}</h3><p>{text}</p></div>)}</div></>}
+      <h2>实现与取舍</h2>
+      {study ? <div class="implementation-details"><details><summary>项目要解决的问题</summary><p>{p.challenge}</p></details>{p.decisions.map(([title,text]) => <details><summary>{title}</summary><p>{text}</p></details>)}</div> : <><p>{p.challenge}</p><div class="decision-list">{p.decisions.map(([title,text]) => <section><h3>{title}</h3><p>{text}</p></section>)}</div></>}
     </section>
-    {study && <aside class="case-reading"><p class="eyebrow">RELATED IMPLEMENTATION NOTE</p><h2><a href={withBase(`blog/${study.article.slug}/`)}>{study.article.label} ↗</a></h2><p>继续阅读接口约束、机制与验证边界。</p></aside>}
-    <footer class="detail-footer"><a class="text-link" href={withBase('projects/')}>继续探索其他项目 →</a>{p.link && <a class="source-link" href={p.link} target="_blank" rel="noopener noreferrer">{p.sourceLabel} ↗</a>}</footer>
+    {study && <aside class="case-reading"><h2>相关笔记</h2><a href={withBase(`blog/${study.article.slug}/`)}>{study.article.label}</a></aside>}
+    <footer class="detail-footer"><a href={withBase('projects/')}>返回项目列表</a></footer>
   </article>
 </Layout>
