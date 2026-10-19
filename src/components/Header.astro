@@ -13,7 +13,7 @@ const active = (path: string) => path
 ---
 <header class="site-header">
   <div class="container header-inner">
-    <a class="site-name" href={withBase('')} aria-label={`${resume.name}，返回首页`}>{resume.name}</a>
+    <a class="site-name" href={withBase('')} aria-label={`${resume.name}，返回首页`}>{resume.siteName}</a>
     <nav class="site-nav" aria-label="主要导航">
       {nav.map(item => <a href={withBase(item.path)} aria-current={active(item.path) ? 'page' : undefined}>{item.label}</a>)}
     </nav>

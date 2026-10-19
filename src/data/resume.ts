@@ -18,6 +18,7 @@ export const backendInternship = {
 
 export const resume = {
   name: '周骏炜',
+  siteName: 'J. W. Zhou',
   title: 'LLM Agent 算法 / 工程',
   introduction: [
     '我目前在香港中文大学攻读人工智能（科学应用）硕士，本科就读于南京邮电大学数据科学与大数据技术专业。',
